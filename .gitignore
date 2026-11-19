@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/build.log
+*.npy.tmp
+paper/figures/*.png

@@ -1,0 +1,129 @@
+% Flowchart: inputs -> template -> regular two-graphs on 442 points -> line-piece members -> census -> the 2356 graphs.
+% \input this inside a figure; needs \usetikzlibrary{positioning,calc,arrows.meta,fit,backgrounds} and \F, \srg, \Aut.
+% Colour code as in Figure 2: blue = line(s) in a net direction, orange = outside the net, grey = whole fibre.
+% The small drawings use the example member of Figure 2 (its pair 0 -> 3 and its frame).
+% NOTE: Kovaľ's email gives "2 x 7 solutions per pair"; within a fixed frame the census has exactly 7 per pair.
+\begin{tikzpicture}[x=1mm, y=1mm, font=\small,
+  box/.style={draw=black!70, rounded corners=2pt},
+  inbox/.style={box, fill=black!3},
+  fitbox/.style={box, inner sep=2.5mm},
+  txt/.style={inner sep=0pt, align=flush left},
+  ctxt/.style={inner sep=0pt, align=flush center},
+  ibox/.style={box, fill=black!3, inner sep=2.5mm, align=flush center, text width=45mm, minimum height=13mm},
+  fbox/.style={ibox, fill=none, draw=black!45, dashed, text=black!70},
+  arr/.style={-{Stealth[length=2mm]}, semithick, draw=black!75},
+  dot/.style={circle, fill=black!80, inner sep=0pt, minimum size=1.1mm},
+  lab/.style={ctxt, font=\footnotesize, text=black!80},
+  note/.style={font=\footnotesize, text=black!65}]
+\definecolor{cnet}{HTML}{2A78D6}\definecolor{cnon}{HTML}{EB6834}\definecolor{cwhole}{HTML}{9AA1AD}
+\newcommand{\sw}[1]{\textcolor{#1}{\rule[-0.2ex]{1.8mm}{1.8mm}}}
+
+% =========================================================================== inputs
+\draw[inbox] (0,3) rectangle (75,-35);
+\node[ctxt] at (37.5,0) {\textbf{base}: nine points};
+\begin{scope}[shift={(18,-15)}]                                  % Paley(9) = K3 x K3; point i at row i div 3, column i mod 3
+  \foreach \r in {0,1,2} \foreach \c in {0,1,2} \coordinate (p\r\c) at (6.5*\c-6.5, -6.5*\r+6.5);
+  \foreach \r in {0,1,2} {\draw[black!55] (p\r0)--(p\r1)--(p\r2); \draw[black!55] (p\r0) to[bend left=28] (p\r2);}
+  \foreach \c in {0,1,2} {\draw[black!55] (p0\c)--(p1\c)--(p2\c); \draw[black!55] (p0\c) to[bend right=28] (p2\c);}
+  \foreach \r in {0,1,2} \foreach \c in {0,1,2} \node[dot] at (p\r\c) {};
+  \node[lab] at (0,-15) {Paley$(9)=K_3\square K_3$};
+\end{scope}
+\begin{scope}[shift={(55,-15)}]                                  % the tournament i -> i+{1,...,4}; the arcs out of 0 dark
+  \foreach \i in {0,...,8} \coordinate (t\i) at ({90-40*\i}:10);
+  \foreach \i in {1,...,8} \foreach \d in {1,...,4} {
+    \pgfmathtruncatemacro\j{mod(\i+\d,9)}
+    \draw[black!22, -{Stealth[length=0.9mm]}, shorten >=0.9mm, shorten <=0.6mm] (t\i)--(t\j);}
+  \foreach \d in {1,...,4} \draw[black!85, thick, -{Stealth[length=1.5mm]}, shorten >=0.9mm, shorten <=0.6mm] (t0)--(t\d);
+  \foreach \i in {0,...,8} \node[dot] at (t\i) {};
+  \node[font=\scriptsize] at (0,12.3) {$0$};
+  \node[lab] at (0,-15) {$i\to i+\{1,\dots,4\}$};
+\end{scope}
+
+\draw[inbox] (81,3) rectangle (156,-35);
+\node[ctxt] at (118.5,0) {\textbf{fibre}: $AG(2,7)=\F_7^2$};
+\begin{scope}[shift={(97,-15)}]                                  % 7 x 7 points, row a, column b
+  \begin{scope}[scale=1.35]
+  \foreach \a in {0,...,6} \foreach \b in {0,...,6} \fill[black!35] (1.6*\b-4.8, -1.6*\a+4.8) circle (0.22);
+  \draw[cnet, line width=0.9pt] (-4.8,4.8) -- (4.8,-4.8);                       % b - a = 0
+  \draw[cnon, line width=0.9pt] (4.8,4.8) -- (-4.8,-4.8);                       % b + a = 6
+  \foreach \a in {0,...,6} {\fill[cnet] (1.6*\a-4.8, -1.6*\a+4.8) circle (0.42); \fill[cnon] (4.8-1.6*\a, -1.6*\a+4.8) circle (0.42);}
+  \fill[cnet] (0,0) circle (0.42); \draw[cnon, line width=0.6pt] (0,0) circle (0.62);
+  \end{scope}
+  \node[lab] at (0,-15) {row $a$, column $b$};
+\end{scope}
+\node[txt, text width=41mm, font=\footnotesize, anchor=west] at (112,-15)
+  {$4$ of the $8$ directions form a net; lines in net directions are cliques.\\[3pt]
+   \sw{cnet}\ $b-a=0$: net direction\\[1pt]
+   \sw{cnon}\ $b+a=6$: outside the net};
+
+% =========================================================================== template
+\node[txt, text width=120mm, anchor=north west] (tT) at (33,-44)
+  {\textbf{template}: the blocks between fibres are line incidences, signed by Paley$(9)$ and the tournament.
+   This gives a conference graph $\srg(441,220,109,110)$, and with an isolated point $\infty$ a regular two-graph
+   on $442$ points (Seidel eigenvalues $\pm21$).};
+\begin{scope}[shift={(13,-51)}]                                   % nine fibres on the base, and oo
+  \foreach \i in {0,...,8} {\pgfmathtruncatemacro\r{\i/3}\pgfmathtruncatemacro\c{mod(\i,3)}
+    \draw[black!70, fill=white] (4.4*\c-6.6, -4.4*\r+6.6) rectangle ++(3.6,-3.6);}
+  \node[dot] (oo) at (10.5,0) {}; \node[font=\scriptsize, right] at (oo.east) {$\infty$};
+  \coordinate (ti1) at (-10.5,7.5); \coordinate (ti2) at (14,-7.5);
+\end{scope}
+\begin{scope}[on background layer]\node[fitbox, fill=white, fit=(tT)(ti1)(ti2)] (T) {};\end{scope}
+\draw[arr] (37.5,-35) -- (37.5,0 |- T.north);
+\draw[arr] (118.5,-35) -- (118.5,0 |- T.north);
+
+% =========================================================================== instances
+\node[ibox, below=8mm of T.south west, anchor=north west] (OM)
+  {$\Omega_{\mathrm M}$: Mathon \cite{Mathon1978}, Thm~4.1;\\ net directions $\{0\}\cup Q$};
+\node[ibox, below=8mm of T.south, anchor=north] (OK)
+  {$\Omega_{\mathrm P}$: Paley$(49)$ on each fibre};
+\node[fbox, below=8mm of T.south east, anchor=north east] (OF)
+  {$\ge21$ further two-graphs\\ (not counted here)};
+\foreach \n in {OM, OK} \draw[arr] (T.south -| \n) -- (\n.north);
+\draw[arr, dashed, draw=black!45] (T.south -| OF) -- (OF.north);
+
+% =========================================================================== members
+\node[txt, text width=118mm, anchor=north west] (mT) at ($(OM.south west)+(2.5,-10.5)$)
+  {\textbf{members}: switching sets $X$ with $Sx=\rho x$; degree $231$ for $\rho=-21$, $210$ for $\rho=+21$.\\[1pt]
+   \textbf{line pieces}: on each fibre, $X$ is a union of parallel lines, the whole fibre, or empty.\\[1pt]
+   \textbf{decoupling}: the fibres carrying lines come in pairs along arcs of the tournament (in the census:
+   three pairs, and three fibres whole or empty); each pair joins \sw{cnon}\ lines outside the net to \sw{cnet}\ lines in a net direction.};
+\begin{scope}[shift={($(mT.north east)+(6,-1)$)}]                  % the pair 0 -> 3 of Figure 2
+  \foreach \a in {0,...,6} \foreach \b in {0,...,6} {
+    \pgfmathtruncatemacro\u{mod(\a+\b,7)==6}\pgfmathtruncatemacro\v{or(or(mod(\b-\a+7,7)==0, mod(\b-\a+7,7)==1), mod(\b-\a+7,7)==3)}
+    \ifnum\u=1 \fill[cnon] (1.4*\b, -1.4*\a) rectangle ++(1.4,-1.4); \fi
+    \ifnum\v=1 \fill[cnet] (1.4*\b+16, -1.4*\a) rectangle ++(1.4,-1.4); \fi}
+  \draw[black!70] (0,0) rectangle (9.8,-9.8); \draw[black!70] (16,0) rectangle (25.8,-9.8);
+  \draw[arr, thick, draw=black!85] (10.6,-4.9) -- (15.2,-4.9);
+  \node[lab, font=\scriptsize] at (4.9,-12) {fibre $0$}; \node[lab, font=\scriptsize] at (20.9,-12) {fibre $3$};
+  \coordinate (mi) at (27,-13.5);
+\end{scope}
+\begin{scope}[on background layer]\node[fitbox, fill=white, fit=(mT)(mi)] (P) {};\end{scope}
+\foreach \n in {OM, OK} \draw[arr] (\n.south) -- (\n.south |- P.north);
+\draw[arr, dashed, draw=black!45] (OF.south) -- (OF.south |- P.north);
+
+% =========================================================================== census
+\begin{scope}[shift={($(P.south west)+(3,-12.5)$)}]              % the frame of the member of Figure 2
+  \foreach \i/\k in {0/cnon,1/cnet,2/cwhole,3/cnet,4/cwhole,5/cnon,6/cwhole,7/cnon,8/cnet} {
+    \pgfmathtruncatemacro\r{\i/3}\pgfmathtruncatemacro\c{mod(\i,3)}
+    \draw[black!70, fill=\k] (3.6*\c, -3.6*\r) rectangle ++(3,-3);}
+  \node[lab, font=\scriptsize] at (5.1,-12.4) {a frame};
+  \coordinate (ci1) at (-0.5,0.5); \coordinate (ci2) at (10.6,-13.4);
+\end{scope}
+\node[txt, text width=134mm, anchor=north west] (cT) at ($(ci1)+(17,-0.5)$)
+  {\textbf{census}, for $\Omega_{\mathrm M}$ and $\Omega_{\mathrm P}$ alike: in each degree $5145=15\cdot7^3$ members.
+   The \emph{frame} of a member says which fibres are whole or empty, which carry how many lines of which kind, and how
+   the fibres with lines are paired (two of the $15$ frames of degree $210$ have the same fibre types and differ only in the
+   pairing); each frame holds $7$ choices on each of its three pairs (Figure~\ref{fig:member}).
+   Up to $\Aut(\Omega)=C_3\times C_3$: $575$ classes of degree $231$ and $603$ of degree $210$.};
+\begin{scope}[on background layer]\node[fitbox, fill=white, fit=(cT)(ci1)(ci2)] (C) {};\end{scope}
+\draw[arr] (P.south -| C.north) -- (C.north);
+
+% =========================================================================== result
+\node[box, line width=0.8pt, inner sep=2.5mm, text width=151mm, align=flush center, below=7mm of C] (all)
+  {$2\times(575+603)=2356$ pairwise non-isomorphic $\srg(442,231,120,121)$\\
+   (members of degree $210$ complemented), including the $14$ of \cite{Plummer442}};
+\draw[arr] (C) -- (all);
+\node[note, text width=156mm, below=2mm of all, align=flush center]
+  {
+   The next case, $q=23$ ($n=13226$), has no line-piece members.};
+\end{tikzpicture}

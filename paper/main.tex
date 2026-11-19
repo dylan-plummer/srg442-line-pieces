@@ -1,0 +1,556 @@
+% D. Plummer and A. Kovaľ, Strongly regular graphs on 442 points from line pieces in two conference two-graphs.
+% Build: pdflatex main && pdflatex main.  Programs and data: https://github.com/dylan-plummer/srg442-line-pieces
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amssymb,amsmath,amsthm,booktabs,graphicx,microtype}
+\usepackage{xcolor}
+\usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{positioning,calc,arrows.meta,fit,backgrounds}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{figures/}}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\srg}{\mathrm{srg}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Pal}{\mathrm{Paley}}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\OM}{\Omega_{\mathrm M}}   % Mathon's two-graph
+\newcommand{\OP}{\Omega_{\mathrm P}}   % the variant with Paley(49) fibres (A.K.'s proposal, 16 Nov 2026)
+\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+
+\title[Strongly regular graphs on 442 points]{Strongly regular graphs on $442$ points from line pieces
+in two conference two-graphs}
+\author{Dylan Plummer}
+\author{Anton Kova\v{l}}
+\date{19 November 2026}
+
+
+
+\begin{document}
+\begin{abstract}
+We construct $2356$ pairwise non-isomorphic strongly regular graphs with parameters $(442,231,120,121)$; their
+complements have parameters $(442,210,99,100)$. They come from two regular two-graphs on $442$ points, Mathon's
+conference two-graph $\OM$ and a variant $\OP$ whose fibres are copies of $\Pal(49)$: $2\cdot575$ of them are regular
+members of degree $231$, and $2\cdot603$ are complements of regular members of degree $210$. Both are instances of one
+template for conference two-graphs on $pq^2+1$ points, in which all points but one are partitioned into $p$ fibres,
+each a copy of the affine plane $\F_q^2$. Each of our graphs is obtained by switching with respect to a set that meets
+every fibre in a union of parallel lines. The fibres that such a set meets non-trivially occur in pairs, and this lets
+us enumerate all such graphs. For each two-graph and degree the $5145$ such switching sets fall into $15$ frames, and each
+frame contains exactly one that is invariant under the subgroup of order $3$ of automorphisms fixing every fibre.
+
+A regular graph in a template two-graph requires $p=s^2$, so $q=s^2-2$, and $q=7$ is the first case. We show that the
+structure found at $q=7$ does not extend to larger $q$ for standard line pieces: it needs a character sum that takes
+exactly two values differing by $s\pm1$, and standard line pieces provide one only for $s=3$. For arbitrary line pieces
+this rests on a conjecture on two-valued character sums over $\F_q$, $q$ prime, except at $q=23$, where we prove it. At $q=23$ ($13226$ points) no
+two-graph of the template has a regular member whose switching set meets every fibre in a union of parallel lines, and
+Mathon's two-graph on $13226$ points (base $\Pal(25)$, circulant skew Latin square) has no regular member invariant
+under its scalar automorphism.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+A strongly regular graph $\srg(v,k,\lambda,\mu)$ is a $k$-regular graph on $v$ vertices, neither complete nor edgeless, in
+which any two adjacent vertices have exactly $\lambda$ common neighbours and any two distinct non-adjacent vertices exactly
+$\mu$; see~\cite{BvM2022}. The parameter sets $(442,231,120,121)$ and $(442,210,99,100)$ were open in Brouwer's
+table~\cite{BrouwerTable} until~\cite{Plummer442}. No such graph is a Cayley graph~\cite[Appendix~B]{NelsonSwartz2025}. Since
+$v=2(2k-\lambda-\mu)$, a graph with these parameters is a regular graph in a regular two-graph on $442$ points, and its
+Seidel matrix is a symmetric conference matrix of order $442$~\cite[\S\S10.3--10.4]{BH2012}. Since $442=9\cdot7^2+1$, Mathon's
+construction~\cite{Mathon1978} gives one; \cite{Plummer442} found $14$ regular graphs in its switching class whose switching sets
+meet every fibre in a union of parallel lines. Here we find all such graphs, in this and in a second two-graph, and
+show that the line-piece construction does not continue to larger orders: for standard line pieces in general, for all
+line pieces at $q=23$, and for arbitrary line pieces beyond $q=23$ conditionally on Conjecture~\ref{conj:twoval}. We do not know whether these two-graphs have regular
+members outside the line-piece model.
+
+In this paper we place Mathon's two-graph in a template of conference two-graphs on $pq^2+1$ points
+(Definition~\ref{def:template}), which also contains a second two-graph $\OP$ with $\Pal(49)$ fibres and at least $21$ further
+two-graphs on $442$ points. Our results are:
+\begin{enumerate}
+\item a complete census of the \emph{line-piece} regular members of $\OM$ and $\OP$: $2356$ pairwise non-isomorphic strongly
+regular graphs (Theorem~\ref{thm:census}); the $5145$ line-piece members of each two-graph and degree are organised by
+decoupled pairs of fibres into $15$ frames, each with exactly one centred member (Section~\ref{sec:census});
+\item the line pieces are sporadic for $q=s^2-2$: a line piece whose intercept set is a translate of a union of
+$\{0\}$, $Q$, $N$ can occur in a line-piece regular member only if a character sum is two-valued with gap $s\pm1$, which happens
+only for $s=3$, i.e.\ $q=7$ (Theorem~\ref{thm:sporadic}); for arbitrary intercept sets this rests on
+Conjecture~\ref{conj:twoval};
+\item at $q=23$ ($13226$ points) no two-graph of the template has a line-piece regular member
+(Proposition~\ref{prop:q23all}), and Mathon's two-graph on $\Pal(25)$ with the circulant square has no regular member
+invariant under its scalar automorphism (Proposition~\ref{prop:q23h}).
+\end{enumerate}
+
+Figure~\ref{fig:flow} gives the structure of the paper: from the template (Section~\ref{sec:template}) through
+line-piece switching and decoupling to the census (Section~\ref{sec:census}), and the sporadicity of the line-piece
+members in Mathon's family (Section~\ref{sec:sporadic}). Section~\ref{sec:verification} lists the programs behind every
+computational statement.
+
+\begin{figure}[t]
+\centering
+\resizebox{0.95\textwidth}{!}{\input{figures/flowchart.tikz}}
+\caption{From the template to the $2356$ graphs.
+The drawings use the colour code and the example member of Figure~\ref{fig:member}.
+Other choices of the template data give at least $23$ pairwise inequivalent two-graphs in all (dashed box); only $\OM$
+\cite{Mathon1978} and $\OP$ are counted here. We do not classify members outside the line-piece model.}
+\label{fig:flow}
+\end{figure}
+
+\section{The template}\label{sec:template}
+
+Let $q\equiv3\pmod4$ be a prime and $p=q+2$, so $n=pq^2+1$. Let $Q$, $N$ be the non-zero squares and non-squares of $\F_q$
+and $V=\F_q^2$; its $q+1$ one-dimensional subspaces are the \emph{lines}, and a non-zero linear form $f$ is determined by
+$\ker f$ up to a factor in $\F_q^\times$. Seidel matrices are taken for a graph on $n-1$ vertices together with an isolated
+point $\infty$. For $x\in\{\pm1\}^n$ with $x_\infty=1$, the graph switched by $x$ is regular of degree $k$ if and only if
+$Sx=\rho x$ with $\rho=n-1-2k$, and it is then strongly regular~\cite{Seidel1976,Taylor1977},~\cite[\S10.3]{BH2012}.
+
+\begin{definition}[template]\label{def:template}
+Let $\Delta$ be a conference graph on a set $B$ of $p$ vertices, $\varepsilon_{ab}=+1$ on edges and $-1$ on non-edges.
+\emph{Template data} consist of
+\begin{enumerate}
+\item[(T1)] for each $i\in B$ a set $\mathcal L_i$ of $(q+1)/2$ lines; the fibre $\Phi_i$ is the Cayley graph on
+$(V,+)$ with connection set $\bigcup_{L\in\mathcal L_i}L\setminus\{0\}$, a strongly regular graph of Latin square
+type~\cite{CalderbankKantor1986};
+\item[(T2)] a regular tournament on $B$;
+\item[(T3)] for each arc $a\to b$ non-zero linear forms $f^+_{ab}$ (tail) and $f^-_{ab}$ (head), such that at every $i$
+the kernels of the out-arc forms are exactly the lines not in $\mathcal L_i$, each once, and the kernels of the in-arc
+forms are exactly the lines in $\mathcal L_i$, each once;
+\item[(T4)] for each arc a set $T_{ab}=\alpha Q+\beta$ if $\varepsilon_{ab}=+1$ and $\alpha(\{0\}\cup N)+\beta$ if
+$\varepsilon_{ab}=-1$ ($\alpha\in\F_q^\times$, $\beta\in\F_q$).
+\end{enumerate}
+The graph has vertex set $B\times V$, fibre $\Phi_i$ on $\{i\}\times V$, and $(a,u)\sim(b,v)$ for an arc $a\to b$ iff
+$f^+_{ab}(u)-f^-_{ab}(v)\in T_{ab}$.
+\end{definition}
+
+\begin{lemma}\label{lem:blocks}
+For a line $D$ let $F^D$ be the space of functions $\varphi\circ\theta$ on $V$ with $\ker\theta=D$ and
+$\sum_s\varphi(s)=0$; the functions on $V$ split as $\langle\one\rangle\oplus\bigoplus_DF^D$ (dimensions
+$1+(q+1)(q-1)=q^2$). The blocks of $S$ are $S_{\infty i}=\one^\top$, $S_{ii}=J-I-2A(\Phi_i)$ and, for an arc $a\to b$,
+$S_{ab}=J-2E_{ab}$ with $E_{ab}(u,v)=[f^+_{ab}(u)-f^-_{ab}(v)\in T_{ab}]$, and $S_{ba}=S_{ab}^\top$. For all template data:
+\begin{enumerate}
+\item[(F1)] $S_{ii}\one=0$, and $S_{ii}$ acts on $F^D$ by $-q$ if $D\in\mathcal L_i$ and by $+q$ if $D\notin\mathcal L_i$.
+\item[(F2)] $S_{ab}\one=\varepsilon_{ab}q\one$ for $a\ne b$.
+\item[(F3)] Let $a\to b$ be an arc and $T=T_{ab}$. Then $S_{ab}$ kills $F^D$ on fibre $b$ for $D\ne\ker f^-_{ab}$, and
+\[S_{ab}(\varphi\circ f^-_{ab})=-2q\,(\one_T*\varphi)\circ f^+_{ab}\in F^{\ker f^+_{ab}},\qquad
+(\one_T*\varphi)(y)=\sum_{t\in T}\varphi(y-t);\]
+$S_{ba}$ kills $F^D$ on fibre $a$ for $D\ne\ker f^+_{ab}$ and sends $\varphi\circ f^+_{ab}$ to
+$-2q\bigl(\sum_{t\in T}\varphi(\cdot+t)\bigr)\circ f^-_{ab}$.
+\item[(F4)] At every fibre $a$, each line $D$ is the kernel of the form at $a$ of exactly one arc at $a$. If $j$ is the
+other end of this arc and $D'$ the kernel of its form at $j$, we call $(j,D')$ the \emph{partner} of $(a,D)$.
+Partnering is an involution, and for the partners $(a,\ker f^+_{ab})$, $(b,\ker f^-_{ab})$ of an arc $a\to b$ we have
+$\ker f^+_{ab}\notin\mathcal L_a$ and $\ker f^-_{ab}\in\mathcal L_b$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(F1) $S_{ii}\one=(q^2-1-(q+1)(q-1))\one=0$. For $\varphi\circ\theta\in F^D$ and a line $L\ne D$, $\theta$ maps
+$L\setminus\{0\}$ onto $\F_q^\times$, so $\sum_{w\in L\setminus0}\varphi(\theta(u+w))=-\varphi(\theta(u))$, while $L=D$ gives
+$(q-1)\varphi(\theta(u))$. Hence $A(\Phi_i)$ acts on $F^D$ by $(q-1)/2$ if $D\in\mathcal L_i$ and by $-(q+1)/2$ otherwise,
+and $S_{ii}=J-I-2A(\Phi_i)$ acts by $-q$ and $+q$.
+
+(F2) For an arc $a\to b$, every vertex of fibre $a$ has $q|T_{ab}|$ neighbours in fibre $b$, and every vertex of fibre
+$b$ has $q|T_{ab}|$ neighbours in fibre $a$. By (T4), $|T_{ab}|=(q-\varepsilon_{ab})/2$, so
+$S_{ab}\one=(q^2-2q|T_{ab}|)\one=\varepsilon_{ab}q\one$, and likewise $S_{ba}\one=\varepsilon_{ab}q\one$.
+
+(F3) Let $\varphi\circ\theta\in F^D$ on fibre $b$; $J$ kills it. If $D\ne\ker f^-_{ab}$, then
+$(f^-_{ab},\theta)\colon V\to\F_q^2$ is a bijection and $(E_{ab}(\varphi\circ\theta))(u)=|T|\sum_r\varphi(r)=0$. If
+$D=\ker f^-_{ab}$, take $\theta=f^-_{ab}$; each level set of $f^-_{ab}$ has $q$ points, which gives the formula. The
+statements for $S_{ba}$ follow in the same way.
+
+(F4) By (T2) there are $(p-1)/2=(q+1)/2$ out-arcs and as many in-arcs at $a$. By (T3) the kernels of the out-arc forms
+at $a$ are the $(q+1)/2$ lines not in $\mathcal L_a$, each once, and those of the in-arc forms are the $(q+1)/2$ lines in
+$\mathcal L_a$, each once. The other statements follow.
+\end{proof}
+
+\begin{proposition}\label{prop:conference}
+For all template data the Seidel matrix $S$ of the graph together with $\infty$ satisfies $S^2=pq^2I$; the two-graph is
+regular with eigenvalues $\pm q\sqrt p$.
+\end{proposition}
+\begin{proof}
+For $a\in B$ and a line $D$ write $F^D(a)$ for the space $F^D$ on fibre $a$. By Lemma~\ref{lem:blocks}, $S$
+preserves the span $W_0$ of $e_\infty$ and the $\one_a$ ($a\in B$), by (F1), (F2) and $S_{\infty i}=\one^\top$. It also
+preserves, for every partner pair $(a,D)$, $(b,D')$ on an arc $a\to b$, the space $W_{a,D}=F^D(a)\oplus F^{D'}(b)$, by
+(F1), (F3), (F4) and because $\one^\top$ kills mean-zero functions. By (F4) these spaces together span all functions on the
+$pq^2+1$ points. On $W_0$, (F2) gives
+$S(c\,e_\infty+\sum_by_b\one_b)=q^2(\sum_by_b)\,e_\infty+\sum_a(c+q\sum_b\varepsilon_{ab}y_b)\one_a$. Since the base is
+a conference graph, $E=(\varepsilon_{ab})$ (with zero diagonal) satisfies $E\one=0$ and $E^2=pI-J$, so
+$\bigl(\begin{smallmatrix}0&q^2\one^\top\\\one&qE\end{smallmatrix}\bigr)^2=pq^2I$ on $W_0$. On $W_{a,D}$ we have
+$D=\ker f^+_{ab}$ and $D'=\ker f^-_{ab}$; identify $F^D(a)$ and $F^{D'}(b)$ with the mean-zero functions on $\F_q$ via
+$f^+_{ab}$ and $f^-_{ab}$. By (F1), (F3) and (F4), $S$ acts on $W_{a,D}$ by
+$\bigl(\begin{smallmatrix}q&-2qC\\-2qC^*&-q\end{smallmatrix}\bigr)$, where $C$ is convolution with $\one_T$ and $C^*$,
+convolution with $\one_{-T}$, is its adjoint. The square is $q^2(I+4CC^*)\oplus q^2(I+4C^*C)$. Convolutions commute,
+and $CC^*$ acts on mean-zero functions by $|\hat\one_T(\psi)|^2=(q+1)/4$ for every non-trivial character $\psi$ of
+$\F_q$, since $T$ is $\alpha Q+\beta$ or $\alpha(\{0\}\cup N)+\beta$ by (T4) and $q\equiv3\pmod4$. So $S^2=q^2(q+2)I=pq^2I$
+on $W_{a,D}$ as well. For the Paley-fibre data this is
+also~\cite[Proposition~6.6]{K833} (there with $p$ and $q$ interchanged), and for the instances of Mathon's Theorem~4.1 it is that
+theorem~\cite{Mathon1978} (Lemma~\ref{lem:mathon-instance}). We also verified $S^2=pq^2I$ entry by entry for $\OM$, $\OP$ and, at
+$q=23$, for two two-graphs on $13226$ points (Mathon's, and the instance with $\Pal(529)$ fibres over $\Pal(25)$), on
+all $174\,927\,076$ entries.
+\end{proof}
+
+By Proposition~\ref{prop:conference}, a regular member has $n-1-2k=\pm q\sqrt p$, so $p$ must be a square. For prime powers
+$q\equiv3\pmod4$, $q\le100$, this happens only for $q=7,23,47,79$, all of them prime (Table~\ref{tab:orders}); only $442$ is within Brouwer's table.
+
+\begin{table}[h]
+\centering
+{\small\setlength{\tabcolsep}{4pt}\begin{tabular}{rrrl}
+\toprule
+$q$ & $p$ & $n$ & possible members\\
+\midrule
+$7$ & $9$ & $442$ & $(442,210,99,100)$, $(442,231,120,121)$\\
+$23$ & $25$ & $13226$ & $(13226,6555,3248,3249)$, $(13226,6670,3363,3364)$\\
+$47$ & $49$ & $108242$ & $(108242,53956,26895,26896)$, $(108242,54285,27224,27225)$\\
+$79$ & $81$ & $505522$ & $(505522,252405,126024,126025)$, $(505522,253116,126735,126736)$\\
+\bottomrule
+\end{tabular}}
+\caption{Orders $n=pq^2+1$ of the template with $p$ a square, $q\le100$.}
+\label{tab:orders}
+\end{table}
+
+\subsection{Mathon's two-graphs as instances}
+Let $L$ be a skew Latin square of order $p$ on the symbols $0,\pm1,\dots,\pm\frac{p-1}2$, $\chi$ the quadratic character of
+$\F_q$, $\chi'=\chi-\delta_0$, $g$ a primitive element and $c_k=g^{2k}$. With vertices $\infty$ and $(i,a,b)$, and the linear forms
+$\ell_m(a,b)=b-ma$ ($m\in\F_q$) and $\ell_\infty(a,b)=a$ (the line $\ker\ell_m$ has slope $m$), Mathon's
+Theorem~4.1~\cite{Mathon1978} (compare~\cite{SeberryWhiteman1988}) gives, after a translation by his constant $a_1$, the Seidel blocks between $(i,a,b)$ and $(j,a',b')$
+\begin{align*}
+\text{(M1)}\quad&S_{ii}=\begin{cases}1,&a'=a,\ b'\ne b,\\-1,&a'\ne a,\ b'=b,\\-\chi(a'-a)\chi(b'-b),&a'\ne a,\ b'\ne b,\end{cases}\\
+\text{(M2)}\quad&S_{ij}=\Sigma_{ij}\,\chi'\bigl(b'-b-c_k(a+a')\bigr)\ \text{ for } 0<k=L(i,j)<\tfrac{p-1}2,\\
+&S_{ij}=\Sigma_{ij}\,\chi'(b'-a)\ \text{ for } k=\tfrac{p-1}2,
+\end{align*}
+and $S_{ij}=S_{ji}^\top$ for $L(i,j)<0$, where $\Sigma$ is the Seidel matrix of the base, so $\Sigma_{ij}=-\varepsilon_{ij}$. We write $\Omega_q$ for this
+two-graph and $\OM=\Omega_7$ (base $\Pal(9)$, circulant square).
+
+\begin{lemma}\label{lem:mathon-instance}
+For $q$ prime, every instance of Mathon's Theorem~4.1 is an instance of Definition~\ref{def:template}.
+\end{lemma}
+\begin{proof}
+See~\cite[Section~6.5]{K833}. In the literal transcription of Mathon's (3.1)--(3.6):
+\begin{itemize}
+\item the fibre $A_d$ is the Cayley graph on $\F_q^2$ with the $(q+1)/2$ lines of slopes $\{0\}\cup Q$, which is (T1);
+\item each of $A_1,\dots,A_{(p-1)/2}$ is a line incidence $[f(u)-f'(v)\in T]$ with tail form $\ell_{-c_k}$ (slope in
+$N$, outside the fibre's lines) and head form $\ell_{c_k}$ (slope in $Q$, inside), with $\ell_\infty,\ell_0$ for
+$k=\frac{p-1}2$; the tail kernels are pairwise distinct, as are the head kernels, and $T=N$ on base edges and
+$T=\{0\}\cup Q$ on non-edges; this is (T3)--(T4);
+\item every row of the skew Latin square contains each of $\pm1,\dots,\pm\frac{p-1}2$ once, which gives the regular
+tournament (T2).\qedhere
+\end{itemize}
+\end{proof}
+
+\paragraph{The two instances at $q=7$.} Both have base $B=\Z_9$ with $\Delta=\Pal(9)$, the $3\times3$ rook's graph
+($a\sim b$ iff $a\equiv b\pmod3$ or $\lfloor a/3\rfloor=\lfloor b/3\rfloor$), the circulant tournament $i\to i+d$
+($d=1,2,3,4$), the same lines $\mathcal L_i$ on every fibre, and arc data depending only on $d$ (Table~\ref{tab:arcs}).
+A vertex is $(i,u)$ with $u=(x,y)\in\F_7^2$, and in Table~\ref{tab:arcs} the pair $(\alpha,\beta)$ denotes the form
+$u\mapsto\alpha x+\beta y$. For $\OM$, $(x,y)$ are Mathon's coordinates $(a,b)$, so $\ell_m=(-m,1)$ and $\ell_\infty=(1,0)$.
+
+For $\OM$ the lines are those of slopes $\{0\}\cup Q=\{0,1,2,4\}$. The second two-graph $\OP$ has $\Pal(49)$ on every
+fibre: with $\F_{49}=\F_7[w]$, $w^2=3$, and $u\mapsto x+yw$, the four lines whose non-zero points are the squares of
+$\F_{49}$ are those of slopes $0,3,4,\infty$. Both data satisfy (T1)--(T4), and both graphs on $441$ vertices are
+$\srg(441,220,109,110)$.
+
+$\OP$ is the case $d=1$, in the notation of~\cite{K833}, of the Paley-fibre template there ($\Pal(q^2)$ fibres over a conference graph on
+$q+2$ points, one line incidence per direction), so it too lies in a family in $q$, and Proposition~\ref{prop:q23all}
+covers its members at $q=23$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|ccc|ccc}
+\toprule
+ & \multicolumn{3}{c|}{$\OM$} & \multicolumn{3}{c}{$\OP$}\\
+$d$ & $f^+$ & $f^-$ & $T$ ($\varepsilon=+1$ / $-1$) & $f^+$ & $f^-$ & $T$ ($\varepsilon=+1$ / $-1$)\\
+\midrule
+$1$ & $(2,1)$ & $(5,1)$ & $N$ / $\{0\}\cup Q$ & $(1,1)$ & $(1,0)$ & $Q$ / $\{0\}\cup N$\\
+$2$ & $(4,1)$ & $(3,1)$ & $N$ / $\{0\}\cup Q$ & $(1,3)$ & $(0,1)$ & $Q$ / $\{0\}\cup N$\\
+$3$ & $(1,1)$ & $(6,1)$ & $N$ / $\{0\}\cup Q$ & $(1,4)$ & $(1,2)$ & $Q$ / $\{0\}\cup N$\\
+$4$ & $(1,0)$ & $(0,1)$ & $N$ / $\{0\}\cup Q$ & $(1,6)$ & $(1,5)$ & $Q$ / $\{0\}\cup N$\\
+\bottomrule
+\end{tabular}
+\caption{Arc data of the arc $i\to i+d$ of $\OM$ and $\OP$ ($Q=\{1,2,4\}$, $N=\{3,5,6\}$; $T$ depends on whether
+$\{i,i+d\}$ is an edge of $\Pal(9)$). For $\OM$, $f^\pm=(\pm m,1)$ with $m=3^{2d}\bmod7$ for $d\le3$.}
+\label{tab:arcs}
+\end{table}
+
+That $\OP$ and $\OM$ are not isomorphic is~\cite[Computation~6.7]{K833}. Already at order $46$ Mathon's Theorem~4.1
+gives four inequivalent conference matrices, one for each of four labellings of the pentagon; his two inequivalent
+skew Latin squares of order $5$ give the same four~\cite[p.~330]{Mathon1978}. On $442$ points, other choices of the
+template data (not only of the directions) give further two-graphs; with $\OM$ and $\OP$ there are at least $23$,
+pairwise non-isomorphic by two two-graph invariants (Table~\ref{tab:programs}; Figure~\ref{fig:flow}). The first counts,
+for points $x$, $y$, the $5$-point sets containing $x$ and $y$ all of whose ten triples belong to the two-graph
+(equivalently, the $4$-cliques through $y$ in the descendant at $x$), and takes the multiset of the sorted rows,
+refined by colour refinement. The second hashes each descendant $D_x$ by the numbers of edges inside the common
+neighbourhoods of its pairs of vertices, and takes the multiset of the $442$ hashes. Only $\OM$ and $\OP$ enter the
+census.
+
+\section{Line-piece members and the census}\label{sec:census}
+
+\subsection{Decoupling}\label{sec:decoupling}
+A vector $x$ with $x_\infty=1$ is a \emph{line-piece vector} if on every fibre $x(i,u)=g_i(\theta_i(u))$ for a non-zero linear
+form $\theta_i$ and a function $g_i\colon\F_q\to\{\pm1\}$ (constant $g_i$ allowed); equivalently, every fibre meets the
+switching set in a union of parallel lines. Put $M_i=\sum_{s\in\F_q}g_i(s)$.
+
+\begin{lemma}[decoupling]\label{lem:decouple}
+Let $x$ be a line-piece vector with $Sx=\rho x$, where $\rho\ne\pm q$ (for regular members $\rho=\pm q\sqrt p$, so this
+always holds). Let $\tilde g_i=g_i-M_i/q$ be the mean-zero part of $g_i$.
+\begin{enumerate}
+\item[(D1)] The fibres with non-constant $g_i$ are matched in pairs along arcs. On a matched arc $a\to b$ we have
+$\ker\theta_a=\ker f^+_{ab}$ and $\ker\theta_b=\ker f^-_{ab}$; replacing $g_i$ by $g_i(\lambda\,\cdot)$, we may take
+$\theta_a=f^+_{ab}$ and $\theta_b=f^-_{ab}$.
+\item[(D2)] On every matched arc $a\to b$, with $T=T_{ab}$ and for all $y\in\F_q$,
+\[(q-\rho)\,\tilde g_a(y)=2q\sum_{t\in T}\tilde g_b(y-t),\qquad(-q-\rho)\,\tilde g_b(y)=2q\sum_{t\in T}\tilde g_a(y+t).\]
+\item[(D3)] $1+\sum_{j\ne i}\varepsilon_{ij}M_j=\frac{\rho}{q}M_i$ for all $i\in B$, and $q\sum_{i\in B}M_i=\rho$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+We use Lemma~\ref{lem:blocks}.
+
+Write $x_i=\frac{M_i}{q}\one+\tilde g_i\circ\theta_i$. Fix a fibre $a$ and a line $D$, and project the fibre-$a$ rows of
+$Sx=\rho x$ onto $F^D$. Let $\sigma_a(D)=-1$ if $D\in\mathcal L_a$ and $+1$ otherwise. By (F1), the block $S_{aa}$
+contributes $\sigma_a(D)\,q\,\tilde g_a\circ\theta_a$ if $D=\ker\theta_a$, and nothing otherwise. By (F2)--(F4), and since the column of $\infty$ is constant, the
+only other contribution is $S_{aj}(\tilde g_j\circ\theta_j)$ from the partner $(j,D')$, and it occurs only when
+$\ker\theta_j=D'$. Suppose $\tilde g_a\ne0$ and take $D=\ker\theta_a$. The projection reads
+\[(\sigma_a(D)\,q-\rho)\,\tilde g_a\circ\theta_a=-S_{aj}(\tilde g_j\circ\theta_j)\quad\text{if }\ker\theta_j=D',\]
+and $(\sigma_a(D)\,q-\rho)\,\tilde g_a\circ\theta_a=0$ otherwise. The left side is non-zero because $\rho\ne\pm q$.
+Hence $\ker\theta_j=D'$ and $\tilde g_j\ne0$. Since partnering is an involution, the non-constant fibres are matched in
+pairs along arcs, with the kernels of the arc's forms; this is (D1).
+
+On a matched arc $a\to b$, (T3) gives $\sigma_a=+1$ at $\ker f^+_{ab}\notin\mathcal L_a$ and $\sigma_b=-1$ at
+$\ker f^-_{ab}\in\mathcal L_b$, so the two projections read $q\tilde g_a-2q\,\one_T*\tilde g_b=\rho\tilde g_a$ and
+$-q\tilde g_b-2q\sum_t\tilde g_a(\cdot+t)=\rho\tilde g_b$; this is (D2). The non-constant parts are mapped to mean-zero
+functions, so by (F1)--(F2) the constant part of the fibre-$a$ rows is $1+\sum_{b\ne a}\varepsilon_{ab}M_b=\rho M_a/q$,
+and the row of $\infty$ is $\sum_i\sum_ux_i(u)=q\sum_iM_i=\rho$; this is (D3).
+\end{proof}
+
+\subsection{Frames and centred members}
+Let $h$ be the map $(i,u)\mapsto(i,2u)$ fixing $\infty$. For $\OM$ and $\OP$ it is an automorphism that fixes every
+fibre (the sets $T$ of Table~\ref{tab:arcs} are unions of $\{0\},Q,N$, and $2\in Q$). For $\OM$,
+$\Aut\Omega=\langle h,t\rangle\cong C_3\times C_3$, where $t\colon(i,u)\mapsto(i+3,u)$ translates the base~\cite[Proposition~2.3]{Plummer442};
+$\Aut\OP$ is also $C_3\times C_3$ (Table~\ref{tab:programs}). Indeed, the descendant of $\OP$ at $\infty$ is isomorphic to
+no other descendant, so $\Aut\OP$ fixes $\infty$ and equals the automorphism group of that descendant, which nauty
+gives as $C_3\times C_3$. Every isomorphism between two graphs of one switching class
+is an automorphism of the two-graph, so the isomorphism classes of members are the $\Aut\Omega$-orbits, and the
+automorphism group of a member is its stabiliser in $\Aut\Omega$~\cite[Lemma~2.4]{Plummer442}.
+
+By Lemma~\ref{lem:decouple}, the fibres on which a line-piece member is not constant come in pairs along arcs.
+By (T3), each pair joins a piece in a direction of the net of one fibre to a piece in a direction outside the net of
+the other (Figure~\ref{fig:member}). On a matched arc, the $14$ solutions of (D2) fall into two \emph{sign classes},
+each consisting of the $7$ translates $g(\cdot-c)$, $c\in\F_7$, of one solution.
+
+\begin{definition}
+The \emph{frame} of a line-piece member consists of its matched arcs, the sign class of its solution on each matched
+arc, and the sign of $x$ on each constant fibre.
+\end{definition}
+
+The census (Theorem~\ref{thm:census}) shows that for each two-graph and degree there are $15$ frames. Each frame has
+three matched arcs and contains all $7^3$ members obtained by choosing one of the $7$ translates on each arc; this
+accounts for all $5145=15\cdot7^3$ line-piece members per degree.
+
+Exactly one member of each frame is fixed by $h$. In each sign class there is one solution whose intercept set is a
+union of $\{0\}$, $Q$, $N$. Since $h$ multiplies by $2\in Q$, it maps the translate of this solution by $c$ to its
+translate by $c/2$, so a member is fixed by $h$ only if $c=0$ on every pair. We call this member the \emph{centred}
+member of its frame. The centred members of $\OM$ are the graphs of~\cite{Plummer442}.
+
+The group $\Aut\Omega\cong C_3\times C_3$ permutes the frames. In degree $231$ the $15$ frames form $5$ orbits of
+length $3$; in degree $210$ they form $3$ orbits of length $3$ and $6$ fixed frames. Each orbit of length $3$ holds
+$115$ isomorphism classes ($114$ rigid ones and the centred one), and each fixed frame holds $43$. This gives
+$575=5\cdot115$ and $603=3\cdot115+6\cdot43$.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{member.pdf}
+\caption{A line-piece member of $\OM$ of degree $231$ (a solution of $Sx=-21x$); it is not centred.
+(a)~The base $\Z_9$ with the tournament $i\to i+\{1,\dots,4\}$ (grey), points coloured by the kind of piece on their
+fibre. The black arrows $0\to3$, $7\to1$, $5\to8$ are the decoupled pairs (Lemma~\ref{lem:decouple}).
+(b)~The fibres, one row per pair, and the whole fibres $2$, $4$, $6$. In each $7\times7$ grid ($a$ indexes rows, $b$
+columns) the coloured cells form $X$. Fibres $1$, $3$, $8$ meet $X$ in three lines $b-a=c$, a net direction; fibres
+$0$, $5$, $7$ meet it in one line $b+a=c$, outside the net.}
+\label{fig:member}
+\end{figure}
+
+\subsection{The census}
+\begin{theorem}\label{thm:census}
+The line-piece regular members of $\OM$ fall into $575$ isomorphism classes of degree $231$ and $603$ of degree
+$210$, and the same holds for $\OP$. After complementing the members of degree $210$, this gives
+$2\cdot(575+603)=2356$ strongly regular graphs with parameters $(442,231,120,121)$. They are pairwise
+non-isomorphic, and $2256$ of them have trivial automorphism group.
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:decouple}, a line-piece vector satisfies $Sx=\rho x$ if and only if (D1), (D2) and (D3) hold; the conditions are sufficient because, by (F1)--(F4), they
+are all the components of $Sx=\rho x$. For $\rho=\pm21$, each arc and each set $T$ admits $14$ solutions of (D2).
+Combining these with (D3) gives all line-piece members, and each resulting graph was also checked directly to be
+strongly regular.
+
+Isomorphism classes of members are $\Aut\Omega$-orbits~\cite[Lemma~2.4]{Plummer442}, so we keep one member per
+orbit. Two independent canonical labellings confirm that the $2356$ graphs are pairwise non-isomorphic: a program
+written for this purpose, and bliss~\cite{bliss} via igraph~\cite{igraph}. The second computation also gives the
+automorphism groups in Table~\ref{tab:aut}. Expanding the representatives back to labelled vectors gives $5145$
+vectors per degree and two-graph, as the frame decomposition predicts. As a control, the enumeration reproduces the
+$15$ solutions per degree on $\OM$ of~\cite[Theorem~3.2]{Plummer442}, together with their graphs. The programs are
+listed in Table~\ref{tab:programs}.
+\end{proof}
+
+\begin{table}[t]
+\centering
+{\small\setlength{\tabcolsep}{5pt}\input{figures/aut_table.tex}}
+\bigskip
+\caption{Automorphism groups of the $2356$ census graphs, by two-graph and degree (members of degree $210$ through
+their complements). Each column gives $|\Aut|$ and the orbit lengths on the $442$ vertices. Numbers in brackets count
+graphs known before the census: for $\OM$ the $14$ graphs of~\cite{Plummer442}, for $\OP$ $15$ members found earlier
+with the same line-piece program ($14$ centred, $1$ rigid). So $29$ of the $2356$ graphs were known before.}
+\label{tab:aut}
+\end{table}
+
+No census graph has a $22$-clique: the clique number is $13$ for $2192$ graphs and $14$ for $164$, all of the latter
+members of $\OM$ of degree $231$ (Table~\ref{tab:programs}). Since $22=1+231/11$ is the Delsarte bound, no census graph
+is geometric; in particular none is the block graph of a Steiner system $S(2,11,221)$, whose existence remains open. Nor is any of them the halved graph of a distance-regular graph on $884$
+vertices with Delsarte cliques of size $22$~\cite{BCN}.
+
+% ---------------------------------------------------------------------------------------------------------------
+\input{sections/sporadic.tex}
+
+\subsection{Every instance at \texorpdfstring{$q=23$}{q=23}}\label{ssec:q23all}
+Proposition~\ref{prop:q23h} concerns one two-graph. Lemma~\ref{lem:decouple} holds for every instance of the template,
+which gives a statement on line pieces for all of them, with arbitrary intercept sets.
+
+\begin{proposition}\label{prop:q23all}
+Let $\Omega$ be the two-graph of any template data with $q=23$ ($n=13226$). There is no line-piece vector $x$ with
+$Sx=\pm115\,x$. Hence $\Omega$ has no $\srg(13226,6555,3248,3249)$ and no $\srg(13226,6670,3363,3364)$ member whose
+switching set meets every fibre in a union of parallel lines.
+\end{proposition}
+\begin{proof}
+By (D1), every non-constant fibre lies on a matched arc and satisfies (D2). If $T'=\alpha T+\beta$, then $(g_a,g_b)$
+solves (D2) for $T$ if and only if $(g_a',g_b')$ with $g_a'(y)=g_a(\alpha^{-1}(y-\beta))$ and
+$g_b'(y)=g_b(\alpha^{-1}y)$ solves it for $T'$. So it suffices to take $T\in\{Q,N,\{0\}\cup Q,\{0\}\cup N\}$. An
+exhaustive search over all $2^{23}$ functions $g$, for these four sets and both $\rho=\pm115$, finds no solution. Hence
+every fibre is constant, $M_i=23c_i$ with $c_i=\pm1$, and (D3) reads
+$1+23\sum_{j\ne i}\varepsilon_{ij}c_j=\pm5\cdot23\,c_i$, which is impossible modulo $23$.
+\end{proof}
+As a control, the same program at $q=7$ finds $14$ solutions per arc and $5145$ vectors per degree, as in the census.
+Independently, CP-SAT~\cite{CPSAT} finds no regular member of $\Omega_{23}$ (Section~\ref{sec:sporadic}) in the line-piece
+model of~\cite{Plummer442}, where every fibre is empty, whole, or $\ell_m^{-1}(T)$ with $T$ a union of $\{0\},Q,N$, for
+either degree.
+
+% ---------------------------------------------------------------------------------------------------------------
+\section{Verification, data and code}\label{sec:verification}
+Table~\ref{tab:programs} lists, for each computational statement, the programs that check it: A.K.'s are in
+\code{koval/}, D.P.'s in \code{plummer/}. Where both are named, the two programs were written independently.
+
+\begin{table}[!ht]
+\centering\small
+\begin{tabular}{p{0.42\textwidth}p{0.5\textwidth}}
+\toprule
+statement & programs\\
+\midrule
+template two-graphs $\OM$, $\OP$; $S^2=pq^2I$ & A.K.: \code{P2\_family442.py}, \code{check\_template\_data.py}; $q=23$: \code{c5\_build23.py}\\
+Mathon's blocks are template instances (Lemma~\ref{lem:mathon-instance}) & A.K.: \code{mathon\_literal\_blocks.py}
+($q=3,7,23$, with a negative control); Mathon's printed matrices at $q=3$: \code{c1\_controls.py}\\
+$\Aut\OP\cong C_3\times C_3$ & A.K.: \code{P3\_members.py} (nauty~\cite{nauty} on the descendant at $\infty$, the unique fixed point)\\
+census, Theorem~\ref{thm:census} & A.K.: \code{P3\_members.py}, \code{gcanon.c}, \code{members.py}; D.P.:
+\code{census\_props.py} (bliss), \code{frames.py} ($5145=15\cdot7^3$)\\
+the $23$ two-graphs are pairwise non-isomorphic & A.K.: \code{f5.c} with \code{f5\_invariant.py}, \code{descinv.c} with \code{twograph23\_second.py}\\
+no $22$-cliques (clique numbers $13$, $14$) & A.K.: \code{dcliq.c}, \code{make\_controls.py} (Steiner-block-graph controls), \code{cliques\_per\_graph.tsv};
+D.P.: check of the $14$ graphs of~\cite{Plummer442}\\
+slope lemma, pair equations (Section~\ref{sec:sporadic}) & D.P.: \code{sporadic\_check.py} ($q=7,23$; $504$ pairs on $14$
+graphs), \code{sporadic\_figs.py}\\
+$h$-invariant search (Proposition~\ref{prop:q23h}, Remark~\ref{rem:search}) & D.P.: \code{plummer/m23} (\code{mitm.py},
+\code{glob.py}, \code{verify\_hit.py}; control at $q=7$ also \code{reduced.py})\\
+Proposition~\ref{prop:q23all} & A.K.: \code{c3\_arcs.py}, \code{c4\_global.py} (controls: their runs at $q=7$); D.P.:
+CP-SAT on the line-piece model of~\cite{Plummer442}, \code{plummer/m23/pieces.py}\\
+two-valued sets (Remark~\ref{rem:twovalued}, Conjecture~\ref{conj:twoval}) & D.P.: \code{plummer/m23/twoval.py}\\
+hashes and counts of the census files, clique numbers, orbit arithmetic & A.K.: \code{check\_numbers.py}\\
+Tables~\ref{tab:orders}, \ref{tab:arcs}, \ref{tab:aut}; (F1)--(F3) block by block on $\OM$, $\OP$ and four random template data; (D3) on $48$ members & D.P.: \code{check\_paper442.py}\\
+\bottomrule
+\end{tabular}
+\caption{Programs behind the computational statements. The census is stored as four graph6 files (in
+\code{koval/data/koval442\_linepiece\_2356.zip}), with SHA-256 \code{46fe141c\ldots} ($\OP$, $231$), \code{8f91dba6\ldots}
+($\OP$, $210$, complemented), \code{ab384ab8\ldots} ($\OM$, $231$) and \code{7e1207a4\ldots} ($\OM$, $210$, complemented);
+the full hashes are in \code{koval/README.md}. Programs and data:
+\url{https://github.com/dylan-plummer/srg442-line-pieces}.}
+\label{tab:programs}
+\end{table}
+\FloatBarrier
+
+\section{Open questions}\label{sec:open}
+\begin{question}
+Does any template two-graph on $13226$ points, or any two-graph from Mathon's Theorem~4.2, have a regular member? By
+Proposition~\ref{prop:q23all}, the switching set of such a member of a template two-graph is not a union of parallel
+lines on some fibre.
+\end{question}
+\begin{question}
+Is the template two-graph with $\Pal(529)$ fibres on $13226$ points also free of $h$-invariant regular members?
+(Theorem~\ref{thm:sporadic} already holds for it, Remark~\ref{rem:alltemplates}.)
+\end{question}
+\begin{conjecture}\label{conj:twoval}
+For every prime $q\equiv3\pmod4$, the subsets $T\subseteq\F_q$ for which $\chi'*\one_T$ is two-valued are exactly the
+translates of $\{0\}$, $N$, $\{0\}\cup Q$ and $\F_q^\times$ (checked for $q\in\{7,11,19,23,31\}$, Remark~\ref{rem:twovalued}).
+\end{conjecture}
+\begin{question}
+Can an exact search reach members of $\Omega_{23}$ with less symmetry than $\langle h\rangle$, or other bases and skew Latin
+squares at $q=23$?
+\end{question}
+
+\subsection*{Use of AI systems}
+This work was done with substantial assistance from AI systems; they are not authors, and the authors are responsible
+for all content. On the first author's side, the search and verification programs, the figures, the integration of
+the two authors' material and a first draft of the text were produced in collaboration with an AI assistant (Claude
+Opus 5.5, Anthropic) under the first author's direction. Separate AI sessions then reviewed the draft as a referee, as
+a literature and citation check, and as a readability check, and all results were checked as described in
+Section~\ref{sec:verification}. On the second author's side, the template and its analysis, the programs for the
+census, for the comparison of the two-graphs and for the $q=23$ statements, and the first version of the corresponding
+text were produced by AI coding agents working under the second author's direction, mainly Claude (Anthropic; models
+Claude Fable and Claude Opus); Codex (OpenAI; model Luna) and Junie (JetBrains; model Astra) were used as independent
+checkers, and one of them recomputed the census from the definitions with its own programs. No result is accepted on
+the word of such a system: every graph of the census is certified by exact integer arithmetic, confirmed by programs
+written independently on both authors' sides.
+
+\begin{thebibliography}{99}\small
+\bibitem{BrouwerTable} A.~E.~Brouwer, \emph{Parameters of strongly regular graphs},
+\url{https://aeb.win.tue.nl/graphs/srg/srgtab.html}, accessed 28 October 2026.
+\bibitem{BH2012} A.~E.~Brouwer and W.~H.~Haemers, \emph{Spectra of Graphs}, Universitext, Springer, New York, 2012,
+doi:10.1007/978-1-4614-1939-6.
+\bibitem{BvM2022} A.~E.~Brouwer and H.~Van~Maldeghem, \emph{Strongly Regular Graphs}, Encyclopedia Math.\ Appl.\ \textbf{182},
+Cambridge Univ.\ Press, 2022, doi:10.1017/9781009057226.
+\bibitem{BCN} A.~E.~Brouwer, A.~M.~Cohen and A.~Neumaier, \emph{Distance-Regular Graphs}, Springer, Berlin, 1989,
+doi:10.1007/978-3-642-74341-2.
+\bibitem{CalderbankKantor1986} R.~Calderbank and W.~M.~Kantor, \emph{The geometry of two-weight codes}, Bull.\ London Math.\
+Soc.\ \textbf{18} (1986), 97--122, doi:10.1112/blms/18.2.97.
+\bibitem{CPSAT} L.~Perron and F.~Didier, \emph{CP-SAT}, OR-Tools v9.15, Google,
+\url{https://developers.google.com/optimization/cp/cp_solver/}.
+\bibitem{igraph} G.~Cs\'ardi and T.~Nepusz, \emph{The igraph software package for complex network research}, InterJournal
+Complex Systems \textbf{1695} (2006).
+\bibitem{GodsilRoyle} C.~Godsil and G.~Royle, \emph{Algebraic Graph Theory}, Grad.\ Texts in Math.\ \textbf{207}, Springer,
+2001, doi:10.1007/978-1-4613-0163-9.
+\bibitem{GoethalsSeidel1967} J.~M.~Goethals and J.~J.~Seidel, \emph{Orthogonal matrices with zero diagonal}, Canad.\ J.\
+Math.\ \textbf{19} (1967), 1001--1010, doi:10.4153/CJM-1967-091-8.
+\bibitem{bliss} T.~Junttila and P.~Kaski, \emph{Engineering an efficient canonical labeling tool for large and sparse
+graphs}, Proc.\ ALENEX 2007, SIAM, 2007, 135--149, doi:10.1137/1.9781611972870.13.
+\bibitem{K833} A.~Kova\v{l}, \emph{A strongly regular graph with parameters $(833,416,207,208)$}, preprint, version~1.2,
+Zenodo, 2026, doi:10.5281/zenodo.23811118.
+\bibitem{LidlNiederreiter} R.~Lidl and H.~Niederreiter, \emph{Finite Fields}, 2nd ed., Encyclopedia Math.\ Appl.\ \textbf{20}, Cambridge Univ.\ Press, 1997.
+\bibitem{Mathon1978} R.~Mathon, \emph{Symmetric conference matrices of order $pq^2+1$}, Canad.\ J.\ Math.\ \textbf{30}
+(1978), 321--331, doi:10.4153/CJM-1978-029-1.
+\bibitem{nauty} B.~D.~McKay and A.~Piperno, \emph{Practical graph isomorphism, II}, J.\ Symbolic Comput.\ \textbf{60}
+(2014), 94--112, doi:10.1016/j.jsc.2013.09.003.
+\bibitem{NelsonSwartz2025} S.~R.~Nelson and E.~Swartz, \emph{Character theoretic techniques for nonabelian partial
+difference sets}, arXiv:2507.23039, version~3, June 2026.
+\bibitem{Paley1933} R.~E.~A.~C.~Paley, \emph{On orthogonal matrices}, J.\ Math.\ Phys.\ \textbf{12} (1933), 311--320, doi:10.1002/sapm1933121311.
+\bibitem{Plummer442} D.~Plummer, \emph{Strongly regular graphs with parameters $(442,231,120,121)$ from Mathon's
+conference two-graph}, preprint, 2026, \url{https://github.com/dylan-plummer/srg442}, commit \code{ab9b114}.
+\bibitem{SeberryWhiteman1988} J.~Seberry and A.~L.~Whiteman, \emph{New Hadamard matrices and conference matrices obtained
+via Mathon's construction}, Graphs Combin.\ \textbf{4} (1988), 355--377, doi:10.1007/BF01864173.
+\bibitem{Seidel1976} J.~J.~Seidel, \emph{A survey of two-graphs}, Colloq.\ Int.\ Teorie Combinatorie (Roma, 1973), Tomo I,
+Atti dei Convegni Lincei \textbf{17}, Accad.\ Naz.\ Lincei, 1976, 481--511.
+\bibitem{Taylor1977} D.~E.~Taylor, \emph{Regular $2$-graphs}, Proc.\ London Math.\ Soc.\ (3) \textbf{35} (1977), 257--274,
+doi:10.1112/plms/s3-35.2.257.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,3 @@
+q=23 p=25 N=13226 K=6555 rho=115: 146 options/block, 1226 distinct equations (1s)
+status INFEASIBLE after 0 solutions
+done 0 solutions 1264s

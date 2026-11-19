@@ -1,0 +1,8 @@
+q=23 rho=115 T=Q: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=115 T=0N: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=115 T=N: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=115 T=0Q: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=-115 T=Q: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=-115 T=0N: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=-115 T=N: 0 per-arc solutions; (M_tail, M_head) classes {}
+q=23 rho=-115 T=0Q: 0 per-arc solutions; (M_tail, M_head) classes {}

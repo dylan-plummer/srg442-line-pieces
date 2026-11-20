@@ -1,7 +1,7 @@
 """second program (nauty-free) for the P3 member classes.
 Runs gcanon (C) on every graph (and complement), turns its canonical order into sha256 of the canonically ordered
 adjacency matrix, and decides: within-file distinctness, cross-file disjointness, complements, matches with the
-reference (untrusted, parsed only) files.  Positive control: random relabellings must reproduce the canonical sha.
+reference (untrusted, parsed only) files.  Positive control: random relabelings must reproduce the canonical sha.
 usage, from koval/ (gcanon.c compiled to bin/gcanon; the four classify outputs in data/P3/):
        python3 -I scripts/census/members.py OUTDIR"""
 import sys, os, json, hashlib, subprocess, random
@@ -106,7 +106,7 @@ if __name__ == "__main__":
         m = sorted(j for (t, j) in matched if t == g)
         print('gen file', g, 'lines matching a reference (graph or complement):', m, 'not matching:', len(R[g]) - len(set(m)), flush=True)
         rep[g]['ref_matched_lines'] = m
-    # positive control: random relabellings
+    # positive control: random relabelings
     rng = random.Random(20261030); ctl = []
     for g in GEN:
         lines = [l.strip() for l in open('%s/%s.g6' % (P3, g)) if l.strip()]

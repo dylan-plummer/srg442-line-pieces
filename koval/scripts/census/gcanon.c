@@ -1,12 +1,12 @@
 /* nauty-free canonical form of (strongly regular) graphs, n <= 512.
-   Pair invariant W(u,v) = #edges inside N(u) cap N(v); edge colour code(u,v) = 2 W(u,v) + A(u,v).
-   Colour refinement with 64-bit multiset hashing (deterministic => an isomorphism invariant; a hash collision can
-   only MERGE colours, never separate isomorphic vertices).  Canonical form by individualisation-refinement:
-   target cell = smallest non-singleton cell (ties: smallest colour), branch over ALL its vertices, keep the
-   lexicographically smallest colour-ordered adjacency matrix  =>  canonical labelling (exact, collision-proof:
+   Pair invariant W(u,v) = #edges inside N(u) cap N(v); edge color code(u,v) = 2 W(u,v) + A(u,v).
+   Color refinement with 64-bit multiset hashing (deterministic => an isomorphism invariant; a hash collision can
+   only MERGE colors, never separate isomorphic vertices).  Canonical form by individualization-refinement:
+   target cell = smallest non-singleton cell (ties: smallest color), branch over ALL its vertices, keep the
+   lexicographically smallest color-ordered adjacency matrix  =>  canonical labeling (exact, collision-proof:
    equal outputs are equal matrices; isomorphic inputs give equal outputs).
    usage: gcanon [c] < file.g6     ('c' = use the complement of every graph)
-   output per graph: "G idx n srg=(k,l,m)|NOTSRG r0=<hash> ms=<hash> cls=<#stable classes w/o individualisation>
+   output per graph: "G idx n srg=(k,l,m)|NOTSRG r0=<hash> ms=<hash> cls=<#stable classes w/o individualization>
                       leaves=<#discrete leaves> ord= v0 v1 ... "                                                   */
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,7 +33,7 @@ static void refine(u64 *c) {
     }
 }
 static int best_have; static int best_ord[MAXN]; static unsigned char best_mat[MAXN][MAXN / 8 + 1];
-static int ord_of(const u64 *c, int *ord) {   /* discrete colouring -> order by colour */
+static int ord_of(const u64 *c, int *ord) {   /* discrete coloring -> order by color */
     for (int i = 0; i < n; i++) ord[i] = i;
     for (int i = 1; i < n; i++) { int v = ord[i], j = i; while (j > 0 && c[ord[j - 1]] > c[v]) { ord[j] = ord[j - 1]; j--; } ord[j] = v; }
     return 0;
@@ -50,7 +50,7 @@ static void search(u64 *c) {
     refine(c);
     if (ncls(c) == n) { leaf(c); return; }
     if (leaves > maxleaves) return;
-    /* target cell: smallest size > 1, ties smallest colour */
+    /* target cell: smallest size > 1, ties smallest color */
     u64 s[MAXN]; memcpy(s, c, n * 8); qsort(s, n, 8, cmpu);
     int bsz = n + 1; u64 bcol = 0;
     for (int i = 0; i < n;) { int j = i; while (j < n && s[j] == s[i]) j++;

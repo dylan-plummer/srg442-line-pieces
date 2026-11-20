@@ -1,9 +1,9 @@
-"""Mathon's conference matrices of order p q^2 + 1, and the d = 1 Paley-fibre template.
-Letters as in Mathon 1978: q = 4t - 1 (fibre field GF(q), prime here), p = 4t + 1 = q + 2
-(base PC-graph / conference graph).  Vertices of the PC-graph: (base i, fibre index), fibre index = outer*q + inner.
+"""Mathon's conference matrices of order p q^2 + 1, and the d = 1 Paley-fiber template.
+Letters as in Mathon 1978: q = 4t - 1 (fiber field GF(q), prime here), p = 4t + 1 = q + 2
+(base PC-graph / conference graph).  Vertices of the PC-graph: (base i, fiber index), fiber index = outer*q + inner.
 
 build_mathon(q, base): literal transcription of Mathon (3.1)-(3.6), (4.1)-(4.3) (Canad. J. Math. 30 (1978) 325-328).
-build_template(q, base): our d = 1 template (srg833 Prop. 6.6): Pal(q^2) fibres, circulant tournament i -> i + d,
+build_template(q, base): our d = 1 template (srg833 Prop. 6.6): Pal(q^2) fibers, circulant tournament i -> i + d,
     out-arc of difference d uses the d-th positive direction at the tail, the d-th negative at the head,
     T = Q_q on base edges, {0} u N_q on base non-edges.
 seidel_square_check(A): exact check S^2 = (n-1) I for S = Seidel matrix of A + isolated point (float32 BLAS, every
@@ -129,7 +129,7 @@ def build_mathon(q, base_adj, L=None):
             A[i*n:(i+1)*n, j*n:(j+1)*n] = B
     return A, mb
 
-# ---------------------------------------------------------------- d = 1 Paley-fibre template
+# ---------------------------------------------------------------- d = 1 Paley-fiber template
 def template_setup(q):
     Fq2 = GF(q * q)
     pts = Fq2.els                                       # (x, y), index q*x + y

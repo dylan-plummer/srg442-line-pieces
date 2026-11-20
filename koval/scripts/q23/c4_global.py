@@ -1,8 +1,8 @@
 """q = 23, step 2: global line-piece system on the base (CP-SAT).
 Base: Paley(p) on GF(p) (p = r^2), elements indexed r*x + y; circulant tournament i -> i + d (d = 1..(p-1)/2) on the
-indices, exactly as in w1lib.build_template.  Unknowns: a set of arcs forming a matching (the non-constant fibres),
+indices, exactly as in w1lib.build_template.  Unknowns: a set of arcs forming a matching (the non-constant fibers),
 for each chosen arc a class (M_tail, M_head) of per-arc solutions for its T, and a sign c_i = +-1 for every unmatched
-fibre (M_i = q c_i).  Constant-part equation (exact):  1 + sum_j eps_ij M_j = (rho / q) M_i  for all i,
+fiber (M_i = q c_i).  Constant-part equation (exact):  1 + sum_j eps_ij M_j = (rho / q) M_i  for all i,
 eps_ij = +1 on base edges, -1 on non-edges.  (The point at infinity has value +1; its equation sum_i q M_i = rho
 follows by summing, since eps 1 = 0.)
 usage: c4_global.py q ARCSJSON rho OUTJSON MODE [timelimit]   MODE = all (enumerate every pattern) | one"""

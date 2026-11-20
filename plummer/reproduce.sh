@@ -23,7 +23,7 @@ $PY -I $S/make_figures.py aut >/dev/null && (cd $REPO && git diff --exit-code --
 echo "== 5. Mathon q = 7: Seidel matrix, slope lemma + pair equations on the 14 graphs, figures' numbers"
 $PY -I $M/build.py 7 3 $W/S7.npy
 $PY -I $S/sporadic_check.py $W/S7.npy | tail -3
-echo "== 6. exact h-invariant search at q = 7 (control: 15 members of each degree, the centred members)"
+echo "== 6. exact h-invariant search at q = 7 (control: 15 members of each degree, the centered members)"
 for K in 231 210; do
   $PY -I $M/pairs.py $W/S7.npy 7 $K $W/pairs7_$K.npy | tail -1
   $PY -I $M/structure.py 7 $W/pairs7_$K.npy $W/struct7_$K.npz | tail -1

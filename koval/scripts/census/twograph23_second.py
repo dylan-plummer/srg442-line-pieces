@@ -3,13 +3,13 @@
 Builds each two-graph from its template data with our own builder (scripts/census/P2_family442.py; template data in
 data/template_data/samples/s1_*.json and data/template_data/gauge/n_*.json, the same files as for f5_invariant.py),
 checks the descendant at infinity exactly (srg(441,220,109,110) by A^2) and S^2 = 441 I on all entries, and runs descinv.c (a new C
-program, independent of f5.c) on the Seidel matrix: one labelling-free hash I(D_x) per point x.  The invariant of the
+program, independent of f5.c) on the Seidel matrix: one labeling-free hash I(D_x) per point x.  The invariant of the
 two-graph is the multiset {I(D_x)}.  Different multisets => non-isomorphic two-graphs; disjoint sets => no descendant
 of one is isomorphic to a descendant of the other.
 
 Controls (same code, known answers):
   * gauge moves (gauge/g_*.json, isomorphic to Omega_K by construction) must give Omega_K's multiset;
-  * re-rooted + randomly relabelled + randomly switched copies of Omega_M, Omega_K, s1_14 (trivial group),
+  * re-rooted + randomly relabeled + randomly switched copies of Omega_M, Omega_K, s1_14 (trivial group),
     s1_3 (order 3) and n_phase_arc0 must give the multiset of their source.
 Run from koval/ (descinv.c compiled to bin/descinv):
       python3 -I scripts/census/twograph23_second.py compute K M   (jobs with index = K mod M; 1 thread each)

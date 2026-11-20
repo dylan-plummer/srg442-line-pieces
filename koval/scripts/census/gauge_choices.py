@@ -1,7 +1,7 @@
-"""Single-knob template choices on the Paley-fibre two-graph ('ours'): the files data/template_data/gauge/*.json.
-Expected gauge (isomorphic two-graph by construction), files g_*.json: fibre translation, fibre scalar, fibre GL(2,7)
-map, fibre relabelling by an automorphism of Paley(9), and a combination.  Non-gauge, files n_*.json: ONE arc changed
-(phase, Q<->N scaling, head-form slope by a square / non-square, tail-form swap at one fibre).
+"""Single-knob template choices on the Paley-fiber two-graph ('ours'): the files data/template_data/gauge/*.json.
+Expected gauge (isomorphic two-graph by construction), files g_*.json: fiber translation, fiber scalar, fiber GL(2,7)
+map, fiber relabeling by an automorphism of Paley(9), and a combination.  Non-gauge, files n_*.json: ONE arc changed
+(phase, Q<->N scaling, head-form slope by a square / non-square, tail-form swap at one fiber).
 The sixteen files data/template_data/samples/s1_*.json come from  P2_family442.py samples 1 16  (seed 1, 16 samples).
 Run from koval/:  python3 -I scripts/census/gauge_choices.py [OUTDIR]   (default data/template_data/gauge; deterministic)"""
 import sys, os, json, random
@@ -62,7 +62,7 @@ def choices():
     out['n_scaleQN_arc0'] = one_arc(base, lambda r: (r[0], r[1], r[2], r[3], frozenset((3 * t) % P for t in r[4])))
     out['n_slope_sq_arc0'] = one_arc(base, lambda r: (r[0], r[1], r[2], (2 * r[3][0] % P, 2 * r[3][1] % P), r[4]))
     out['n_slope_nsq_arc0'] = one_arc(base, lambda r: (r[0], r[1], r[2], (3 * r[3][0] % P, 3 * r[3][1] % P), r[4]))
-    # tail-form swap at fibre 0 between its first two out-arcs
+    # tail-form swap at fiber 0 between its first two out-arcs
     arcs = list(base['arcs']); idx = [k for k, r in enumerate(arcs) if r[0] == 0][:2]
     r0, r1 = arcs[idx[0]], arcs[idx[1]]
     arcs[idx[0]] = (r0[0], r0[1], r1[2], r0[3], r0[4]); arcs[idx[1]] = (r1[0], r1[1], r0[2], r1[3], r1[4])

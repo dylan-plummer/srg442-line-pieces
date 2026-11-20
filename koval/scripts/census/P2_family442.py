@@ -1,24 +1,24 @@
-"""P2 : the d = 1 template on 441 = 7^2 * 9 vertices, generalised.
+"""P2 : the d = 1 template on 441 = 7^2 * 9 vertices, generalized.
 
-Vertex set Z_9 x F_7^2 (fibre i, point u = (x, y), index 49 i + 7 x + y).
+Vertex set Z_9 x F_7^2 (fiber i, point u = (x, y), index 49 i + 7 x + y).
 
 A CHOICE consists of
-  * L[i]   : a set of 4 of the 8 lines through 0 of AG(2,7) for every fibre i; fibre i is the Cayley graph on F_7^2
+  * L[i]   : a set of 4 of the 8 lines through 0 of AG(2,7) for every fiber i; fiber i is the Cayley graph on F_7^2
              with connection set (union of L[i]) minus 0 -- an srg(49,24,11,12) (Latin-square type LS_4(7));
              Paley(49) and Mathon's Kronecker PC-graph are both of this kind;
-  * arcs   : one entry (a, b, fa, fb, T) per pair of fibres, meaning E_ab(u, v) = [fa(u) - fb(v) in T]
+  * arcs   : one entry (a, b, fa, fb, T) per pair of fibers, meaning E_ab(u, v) = [fa(u) - fb(v) in T]
              (fa, fb non-zero linear forms on F_7^2, T a subset of F_7; phase t and slopes are inside fa, fb, T).
 
-Template conditions (sufficient, Prop. d1 of srg833.tex generalised; checked by `template_ok`):
+Template conditions (sufficient, Prop. d1 of srg833.tex generalized; checked by `template_ok`):
   (T1) the quotient: the pairs {a,b} with |T| = 3 form a conference graph on 9 points (Paley(9) = K3 x K3);
   (T2) |T| = 3: T is a (7,3,1) difference set (c*Q + t); |T| = 4: T is the complement of one;
-  (T3) at every fibre a each of the 8 lines is the kernel of exactly one form used at a, and for every arc the tail
+  (T3) at every fiber a each of the 8 lines is the kernel of exactly one form used at a, and for every arc the tail
        form has its kernel OUTSIDE L[tail] (s = +1) and the head form INSIDE L[head] (s = -1)  [=> regular tournament].
 Every choice is verified exactly (A^2 = kI + lam A + mu (J-I-A)); the template conditions are only used to generate.
 
 Two-graph invariant: the canonical certificate (pynauty) of the double cover on 2 * 442 vertices of the Seidel matrix
 of G + isolated point: (x, s) ~ (y, t) iff x != y and S_xy * s * t = -1.  Isomorphic double covers <=> switching-
-equivalent Seidel matrices, i.e. isomorphic two-graphs (antipodal pairs are the only pairs with no common neighbour).
+equivalent Seidel matrices, i.e. isomorphic two-graphs (antipodal pairs are the only pairs with no common neighbor).
 
 Run: python3 -I scripts/census/P2_family442.py <mode> ...
 """
@@ -176,7 +176,7 @@ def graph_aut(A):
 
 # ---------------- the two controls ----------------
 def mathon_choice():
-    """Mathon's conference graph of order 441 (Canad. J. Math. 30 (1978) Thm 4.1, as read by Plummer): fibre
+    """Mathon's conference graph of order 441 (Canad. J. Math. 30 (1978) Thm 4.1, as read by Plummer): fiber
     (i, x) ~ (j, y) iff j - i != 0 and y - x in {0} u chi(j-i) Q  -> lines (1, c), c in {0,1,2,4}; arc P -> Q iff
     (Q - P) mod 9 in {1..4} = k; k <= 3: E = [y - x - m(i+j) in Q], m = 3^(2k) mod 7; k = 4: E = [y - i in Q];
     complement for non-adjacent P, Q in Paley(9) = K3 x K3."""
@@ -202,7 +202,7 @@ def paley49_lines():
 
 
 def ours_choice():
-    """our d1_z9 graph (mathon_compare2.py): Paley(49) fibres, pos/neg forms in lib833.lines() order,
+    """our d1_z9 graph (mathon_compare2.py): Paley(49) fibers, pos/neg forms in lib833.lines() order,
     i -> i+d uses pos[d-1] at i and neg[d-1] at i+d; T = QR on Paley(9)-edges, {0} u NR otherwise."""
     L = paley49_lines(); forms = [(1, 0), (0, 1)] + [(1, b) for b in range(1, P)]
     pos = [f for f in forms if kernel_line(f) not in L]; neg = [f for f in forms if kernel_line(f) in L]
@@ -227,8 +227,8 @@ from fractions import Fraction as Fr
 
 
 def arc_piece_solutions(T, rho):
-    """all (g, h): F_7 -> {+1,-1}, g non-constant, such that x = g(fa(u)) on the tail fibre and h(fb(v)) on the head
-    fibre satisfy the non-constant part of S x = rho x for the block [fa(u) - fb(v) in T] (tail positive, head negative).
+    """all (g, h): F_7 -> {+1,-1}, g non-constant, such that x = g(fa(u)) on the tail fiber and h(fb(v)) on the head
+    fiber satisfy the non-constant part of S x = rho x for the block [fa(u) - fb(v) in T] (tail positive, head negative).
     rho = 21:  h~ = -1/2 sum_t g~(w+t)  and  g~ = -(h~ * T);   rho = -21: h~ = sum_t g~(w+t) and h~ * T = 2 g~."""
     T = sorted(T); out = []
     for bits in range(1, 2 ** P - 1):
@@ -435,7 +435,7 @@ if __name__ == '__main__':
         print('reference certs', len(refs), flush=True)
         A = build(ch); assert verify(A)[0]
         found, arcinfo, groups = piece_members(ch, rho); rng = random.Random(seed)
-        print(ch['name'], 'rho', rho, 'patterns', len(found), 'labelled', sum(e['mult'] for e in found), flush=True)
+        print(ch['name'], 'rho', rho, 'patterns', len(found), 'labeled', sum(e['mult'] for e in found), flush=True)
         seen = {}; tag = name if name in ('ours', 'mathon') else os.path.basename(name)[:-5]
         for pi, e in enumerate(found):
             for r in range(nper):
@@ -506,7 +506,7 @@ if __name__ == '__main__':
             for rho in (21, -21):
                 found, arcinfo, groups = piece_members(ch, rho)
                 cnt.append((len(found), sum(e['mult'] for e in found)))
-            print('sample', s, 'tour-out-edge-scores', sc, 'patterns/labelled rho=21:', cnt[0], 'rho=-21:', cnt[1],
+            print('sample', s, 'tour-out-edge-scores', sc, 'patterns/labeled rho=21:', cnt[0], 'rho=-21:', cnt[1],
                   json.dumps({str(a): sorted(out[a]) for a in range(9)}), flush=True)
     if mode == 'samples':          # samples SEED N
         seed, nsamp = int(sys.argv[2]), int(sys.argv[3]); rng = random.Random(seed)
@@ -532,7 +532,7 @@ if __name__ == '__main__':
             for rho in (21, -21):
                 t = time.time(); found, arcinfo, groups = piece_members(ch, rho)
                 tot = sum(e['mult'] for e in found)
-                print(ch['name'], 'rho', rho, 'mean-patterns', len(found), 'labelled line-piece vectors (x_inf=+1)', tot,
+                print(ch['name'], 'rho', rho, 'mean-patterns', len(found), 'labeled line-piece vectors (x_inf=+1)', tot,
                       'per-arc solution counts', sorted(set(sum(len(v) for v in g.values()) for g in groups.values())),
                       '%.1fs' % (time.time() - t), flush=True)
                 hist = {}
@@ -545,7 +545,7 @@ if __name__ == '__main__':
     if mode == 'controls':
         # mathon441_plummer442.g6: Mathon's instance as given by D. Plummer (file data/mathon441.g6 of his repository
         # github.com/dylan-plummer/srg442); NOT the SageMath graph used by scripts/q23/c1_controls.py.
-        # srg_441_220_109_110_d1_z9.g6: the Paley-fibre graph of [K833, Computation 6.7]; written by
+        # srg_441_220_109_110_d1_z9.g6: the Paley-fiber graph of [K833, Computation 6.7]; written by
         # `base ours data/srg_441_220_109_110_d1_z9.g6` (SHA-256 0356d1e21c3ff601157935dc52d380384314fe196d10af7585d67a1dd7fb6c80).
         mfile = root + '/data/mathon441_plummer442.g6'
         ofile = root + '/data/srg_441_220_109_110_d1_z9.g6'
@@ -553,5 +553,5 @@ if __name__ == '__main__':
             t0 = time.time(); A = build(ch)
             print(ch['name'], 'template_ok', template_ok(ch), 'verify', verify(A), flush=True)
             B = load_g6(open(f).readline())
-            print('  equal to file as LABELLED graphs:', bool((A == B).all()), flush=True)
+            print('  equal to file as LABELED graphs:', bool((A == B).all()), flush=True)
             print('  |Aut(G)|, orbits', graph_aut(A), flush=True)

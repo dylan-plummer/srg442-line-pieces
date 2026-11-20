@@ -3,7 +3,7 @@
 
   1. the 16 files samples/s1_*.json are exactly what  P2_family442.py samples 1 16  generates (seed 1), and the 10 files
      gauge/*.json are exactly what gauge_choices.py generates (compared as parsed JSON);
-  2. every one of the 26 files, and the two built-in choices 'ours' (Paley fibres, Omega_P) and 'mathon' (Omega_M),
+  2. every one of the 26 files, and the two built-in choices 'ours' (Paley fibers, Omega_P) and 'mathon' (Omega_M),
      satisfies the template conditions checked by P2_family442.template_ok, and its graph G (the descendant at infinity)
      is srg(441,220,109,110) exactly (A^2 in int64) with S^2 = 441 I for the Seidel matrix S of G + an isolated point;
   3. the graph6 string of G for 'ours' has the SHA-256 of the file srg_441_220_109_110_d1_z9.g6 of [K833].

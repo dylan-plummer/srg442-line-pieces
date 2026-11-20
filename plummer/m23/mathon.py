@@ -44,7 +44,7 @@ if __name__ == "__main__":
     if q == 3:                                                  # pentagon
         PC = np.array([[1 if (j - i) % 5 in (1, 4) else 0 for j in range(5)] for i in range(5)], dtype=np.int64)
     else:                                                       # Paley(9) = K3 x K3, vertices ordered so the circulant
-        V = list(itertools.product(range(3), repeat=2))         # labelling is the one used for L (any order works for Thm 4.1)
+        V = list(itertools.product(range(3), repeat=2))         # labeling is the one used for L (any order works for Thm 4.1)
         PC = np.array([[1 if (a != b and (a[0] == b[0] or a[1] == b[1])) else 0 for b in V] for a in V], dtype=np.int64)
     A = mathon(q, PC); print("order", len(A), "symmetric", bool((A == A.T).all()), "srg", is_srg(A))
     if is_srg(A):

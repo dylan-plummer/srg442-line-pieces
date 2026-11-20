@@ -9,7 +9,7 @@ SCR = 'data/f5'
 tags = sys.argv[1:]; R = {t: json.load(open('%s/c2_%s.json' % (SCR, t))) for t in tags}
 
 
-def key(r):     # complete invariant if discrete; else the stable colour multiset (invariant, maybe incomplete)
+def key(r):     # complete invariant if discrete; else the stable color multiset (invariant, maybe incomplete)
     return ('canon', r['canonical_seidel_sha']) if r['discrete'] else ('multiset', r['stable_colour_multiset'])
 
 
@@ -17,11 +17,11 @@ groups = {}
 for t in tags: groups.setdefault(key(R[t]), []).append(t)
 print('GROUPS', len(groups))
 for k, v in groups.items(): print('  ', k[0], k[1][:16], v)
-# cross point-colour sets at fixed rounds (shared descendant <=> equal colour at every round)
+# cross point-color sets at fixed rounds (shared descendant <=> equal color at every round)
 for rnd in ('0', '3'):
     sets = {t: set(R[t]['point_colours_round'][rnd]) for t in tags}
     bad = [(a, b, len(sets[a] & sets[b])) for a, b in itertools.combinations(tags, 2) if sets[a] & sets[b] and key(R[a]) != key(R[b])]
-    print('round', rnd, 'pairs in different groups sharing a point colour:', bad)
+    print('round', rnd, 'pairs in different groups sharing a point color:', bad)
 for t in tags:
     r = R[t]; line = {'tag': t, 'name': r['name'], 'discrete': r['discrete'], 'classes_per_round': r['classes_per_round'],
                       'inf_class_size': r['inf_class_size'], 'k4_desc_totals_minmax': r['k4_desc_totals_minmax']}

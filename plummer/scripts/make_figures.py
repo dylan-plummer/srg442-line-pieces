@@ -2,12 +2,12 @@
 """Figures for the joint paper on srg(442,231,120,121) (matplotlib part; the flowchart is figures/flowchart.tikz).
 python3 make_figures.py [member] [aut]     -> ../figures/member.pdf (+ .png preview), aut_table.tex
 
-member: one line-piece member of Mathon's two-graph Omega_M, drawn on the nine AG(2,7) fibres, with the fibre pairs of
+member: one line-piece member of Mathon's two-graph Omega_M, drawn on the nine AG(2,7) fibers, with the fiber pairs of
         the decoupling lemma computed from the Seidel blocks (not assumed). Data: data/member_x.npy, a switching vector x
-        with Sx = -21x (checked here), a non-centred member of the frame with the whole fibres on a line of the base.
+        with Sx = -21x (checked here), a non-centered member of the frame with the whole fibers on a line of the base.
 aut:    table of |Aut| and orbit type of the 2356 census graphs (data/census_props.tsv from census_props.py), by two-graph
         and degree, with how many are among our 29 -> figures/aut_table.tex
-Colours: grey whole fibre, white empty, blue lines in a net direction, orange lines outside the net (all figures)."""
+Colors: gray whole fiber, white empty, blue lines in a net direction, orange lines outside the net (all figures)."""
 import os, sys, json, collections
 import numpy as np
 import matplotlib
@@ -20,7 +20,7 @@ OUT = os.path.join(HERE, "..", "..", "paper", "figures"); os.makedirs(OUT, exist
 plt.rcParams.update({"font.family": "serif", "font.size": 8, "axes.linewidth": 0.5, "pdf.fonttype": 42,
                      "mathtext.fontset": "cm"})
 BLUE, ORANGE, INK, GREY, LIGHT = "#2a78d6", "#eb6834", "#1b1f27", "#9aa1ad", "#e3e6eb"
-SOL = os.path.join(HERE, "..", "data", "member_x.npy")    # a non-centred census member of Omega_M, degree 231 (see README)
+SOL = os.path.join(HERE, "..", "data", "member_x.npy")    # a non-centered census member of Omega_M, degree 231 (see README)
 
 
 def save(fig, name):
@@ -45,7 +45,7 @@ FORMS = [(form_name(m), lambda a, b, m=m: (b - m * a) % 7) for m in range(7)] + 
 
 
 def piece(xf):
-    """(form name, T) with xf = -1 exactly where form(a, b) in T; None for a constant fibre"""
+    """(form name, T) with xf = -1 exactly where form(a, b) in T; None for a constant fiber"""
     if len(set(xf)) == 1: return None
     for name, f in FORMS:
         val = {}
@@ -55,17 +55,17 @@ def piece(xf):
 
 
 def kind(xf, C):
-    """W / E for a constant fibre, else net / non: are the lines of the piece cliques of the fibre graph C?"""
+    """W / E for a constant fiber, else net / non: are the lines of the piece cliques of the fiber graph C?"""
     if len(set(xf)) == 1: return "W" if xf[0] == -1 else "E"
     f = dict(FORMS)[piece(xf)[0]]; lv = np.array([f(a, b) for a in range(7) for b in range(7)])
     return "net" if C[(lv[:, None] == lv[None, :]) & ~np.eye(49, dtype=bool)].all() else "non"
 
 
-KCOL = {"W": GREY, "E": "white", "net": BLUE, "non": ORANGE}       # one colour code for every figure
+KCOL = {"W": GREY, "E": "white", "net": BLUE, "non": ORANGE}       # one color code for every figure
 
 
 def legend(ax, x0, y0, dy, fs=6.5, what=("W", "E", "net", "non")):
-    txt = {"W": "whole fibre", "E": "empty fibre", "net": "lines in a net direction", "non": "lines outside the net"}
+    txt = {"W": "whole fiber", "E": "empty fiber", "net": "lines in a net direction", "non": "lines outside the net"}
     for n, k in enumerate(what):
         ax.add_patch(Rectangle((x0, y0 - n * dy - 0.35 * dy), 0.7 * dy, 0.7 * dy, fc=KCOL[k], ec=INK, lw=0.4))
         ax.text(x0 + 1.1 * dy, y0 - n * dy, txt[k], va="center", fontsize=fs, color=INK)
@@ -91,7 +91,7 @@ def fig_member():
     fig = plt.figure(figsize=(6.3, 2.75))
     ax0 = fig.add_axes([0.0, 0.0, 0.33, 1.0]); ax = fig.add_axes([0.35, 0.0, 0.65, 1.0])
     for a_ in (ax0, ax): a_.set_aspect("equal"); a_.axis("off")
-    # (a) the base points with the tournament i -> i + {1,..,4}; pairs bold, constant fibres filled / hollow
+    # (a) the base points with the tournament i -> i + {1,..,4}; pairs bold, constant fibers filled / hollow
     R = 1.0; pos = {i: np.array([R * np.sin(2 * np.pi * i / 9), R * np.cos(2 * np.pi * i / 9)]) for i in range(9)}
     def arc(a_, i, j, **kw):
         p, q = pos[i], pos[j]; u = (q - p) / np.linalg.norm(q - p)
@@ -107,7 +107,7 @@ def fig_member():
     legend(ax0, -1.3, -1.36, 0.15, fs=6, what=[k for k in ("W", "E", "net", "non") if k in kd])
     ax0.set_xlim(-1.35, 1.35); ax0.set_ylim(-1.95, 1.35)
     ax0.text(-1.3, 1.3, "(a)", fontsize=8, va="top"); ax.text(-0.4, 3 * 10.4 + 0.3, "(b)", fontsize=8, va="top")
-    # (b) one row per pair (in arc direction), the constant fibres in the last column
+    # (b) one row per pair (in arc direction), the constant fibers in the last column
     h = 3.0; cell = 2 * h / 7
     def grid(i, x0, y0):
         for a_ in range(7):
@@ -117,8 +117,8 @@ def fig_member():
                                        ec="#c9ced6", lw=0.2, zorder=3))
         ax.add_patch(Rectangle((x0, y0), 2 * h, 2 * h, fc="none", ec=INK, lw=0.6, zorder=4))
         pc = piece(fib[i])
-        lab = ("whole fibre" if fib[i][0] == -1 else "empty") if pc is None else rf"${pc[0]}\in\{{{','.join(map(str, pc[1]))}\}}$"
-        ax.text(x0 + h, y0 - 0.3, f"fibre {i}\n" + lab, ha="center", va="top", fontsize=6.5, color=INK, linespacing=1.3)
+        lab = ("whole fiber" if fib[i][0] == -1 else "empty") if pc is None else rf"${pc[0]}\in\{{{','.join(map(str, pc[1]))}\}}$"
+        ax.text(x0 + h, y0 - 0.3, f"fiber {i}\n" + lab, ha="center", va="top", fontsize=6.5, color=INK, linespacing=1.3)
     for r, (i, j) in enumerate(pairs):
         if (j - i) % 9 > 4: i, j = j, i
         y0 = (2 - r) * 10.4 + 2.4

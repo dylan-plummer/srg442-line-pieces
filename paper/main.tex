@@ -32,7 +32,7 @@
 \newcommand{\one}{\mathbf 1}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\OM}{\Omega_{\mathrm M}}   % Mathon's two-graph
-\newcommand{\OP}{\Omega_{\mathrm P}}   % the variant with Paley(49) fibres (A.K.'s proposal, 16 Nov 2026)
+\newcommand{\OP}{\Omega_{\mathrm P}}   % the variant with Paley(49) fibers (A.K.'s proposal, 16 Nov 2026)
 \newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
 
 \title[Strongly regular graphs on 442 points]{Strongly regular graphs on $442$ points from line pieces
@@ -47,19 +47,19 @@ in two conference two-graphs}
 \begin{abstract}
 We construct $2356$ pairwise non-isomorphic strongly regular graphs with parameters $(442,231,120,121)$; their
 complements have parameters $(442,210,99,100)$. They come from two regular two-graphs on $442$ points, Mathon's
-conference two-graph $\OM$ and a variant $\OP$ whose fibres are copies of $\Pal(49)$: $2\cdot575$ of them are regular
+conference two-graph $\OM$ and a variant $\OP$ whose fibers are copies of $\Pal(49)$: $2\cdot575$ of them are regular
 members of degree $231$, and $2\cdot603$ are complements of regular members of degree $210$. Both are instances of one
-template for conference two-graphs on $pq^2+1$ points, in which all points but one are partitioned into $p$ fibres,
+template for conference two-graphs on $pq^2+1$ points, in which all points but one are partitioned into $p$ fibers,
 each a copy of the affine plane $\F_q^2$. Each of our graphs is obtained by switching with respect to a set that meets
-every fibre in a union of parallel lines. The fibres that such a set meets non-trivially occur in pairs, and this lets
+every fiber in a union of parallel lines. The fibers that such a set meets non-trivially occur in pairs, and this lets
 us enumerate all such graphs. For each two-graph and degree the $5145$ such switching sets fall into $15$ frames, and each
-frame contains exactly one that is invariant under the subgroup of order $3$ of automorphisms fixing every fibre.
+frame contains exactly one that is invariant under the subgroup of order $3$ of automorphisms fixing every fiber.
 
 A regular graph in a template two-graph requires $p=s^2$, so $q=s^2-2$, and $q=7$ is the first case. We show that the
 structure found at $q=7$ does not extend to larger $q$ for standard line pieces: it needs a character sum that takes
 exactly two values differing by $s\pm1$, and standard line pieces provide one only for $s=3$. For arbitrary line pieces
 this rests on a conjecture on two-valued character sums over $\F_q$, $q$ prime, except at $q=23$, where we prove it. At $q=23$ ($13226$ points) no
-two-graph of the template has a regular member whose switching set meets every fibre in a union of parallel lines, and
+two-graph of the template has a regular member whose switching set meets every fiber in a union of parallel lines, and
 Mathon's two-graph on $13226$ points (base $\Pal(25)$, circulant skew Latin square) has no regular member invariant
 under its scalar automorphism.
 \end{abstract}
@@ -67,24 +67,24 @@ under its scalar automorphism.
 
 \section{Introduction}\label{sec:intro}
 A strongly regular graph $\srg(v,k,\lambda,\mu)$ is a $k$-regular graph on $v$ vertices, neither complete nor edgeless, in
-which any two adjacent vertices have exactly $\lambda$ common neighbours and any two distinct non-adjacent vertices exactly
+which any two adjacent vertices have exactly $\lambda$ common neighbors and any two distinct non-adjacent vertices exactly
 $\mu$; see~\cite{BvM2022}. The parameter sets $(442,231,120,121)$ and $(442,210,99,100)$ were open in Brouwer's
 table~\cite{BrouwerTable} until~\cite{Plummer442}. No such graph is a Cayley graph~\cite[Appendix~B]{NelsonSwartz2025}. Since
 $v=2(2k-\lambda-\mu)$, a graph with these parameters is a regular graph in a regular two-graph on $442$ points, and its
 Seidel matrix is a symmetric conference matrix of order $442$~\cite[\S\S10.3--10.4]{BH2012}. Since $442=9\cdot7^2+1$, Mathon's
 construction~\cite{Mathon1978} gives one; \cite{Plummer442} found $14$ regular graphs in its switching class whose switching sets
-meet every fibre in a union of parallel lines. Here we find all such graphs, in this and in a second two-graph, and
+meet every fiber in a union of parallel lines. Here we find all such graphs, in this and in a second two-graph, and
 show that the line-piece construction does not continue to larger orders: for standard line pieces in general, for all
 line pieces at $q=23$, and for arbitrary line pieces beyond $q=23$ conditionally on Conjecture~\ref{conj:twoval}. We do not know whether these two-graphs have regular
 members outside the line-piece model.
 
 In this paper we place Mathon's two-graph in a template of conference two-graphs on $pq^2+1$ points
-(Definition~\ref{def:template}), which also contains a second two-graph $\OP$ with $\Pal(49)$ fibres and at least $21$ further
+(Definition~\ref{def:template}), which also contains a second two-graph $\OP$ with $\Pal(49)$ fibers and at least $21$ further
 two-graphs on $442$ points. Our results are:
 \begin{enumerate}
 \item a complete census of the \emph{line-piece} regular members of $\OM$ and $\OP$: $2356$ pairwise non-isomorphic strongly
-regular graphs (Theorem~\ref{thm:census}); the $5145$ line-piece members of each two-graph and degree are organised by
-decoupled pairs of fibres into $15$ frames, each with exactly one centred member (Section~\ref{sec:census});
+regular graphs (Theorem~\ref{thm:census}); the $5145$ line-piece members of each two-graph and degree are organized by
+decoupled pairs of fibers into $15$ frames, each with exactly one centered member (Section~\ref{sec:census});
 \item the line pieces are sporadic for $q=s^2-2$: a line piece whose intercept set is a translate of a union of
 $\{0\}$, $Q$, $N$ can occur in a line-piece regular member only if a character sum is two-valued with gap $s\pm1$, which happens
 only for $s=3$, i.e.\ $q=7$ (Theorem~\ref{thm:sporadic}); for arbitrary intercept sets this rests on
@@ -103,7 +103,7 @@ computational statement.
 \centering
 \resizebox{0.95\textwidth}{!}{\input{figures/flowchart.tikz}}
 \caption{From the template to the $2356$ graphs.
-The drawings use the colour code and the example member of Figure~\ref{fig:member}.
+The drawings use the color code and the example member of Figure~\ref{fig:member}.
 Other choices of the template data give at least $23$ pairwise inequivalent two-graphs in all (dashed box); only $\OM$
 \cite{Mathon1978} and $\OP$ are counted here. We do not classify members outside the line-piece model.}
 \label{fig:flow}
@@ -121,7 +121,7 @@ $Sx=\rho x$ with $\rho=n-1-2k$, and it is then strongly regular~\cite{Seidel1976
 Let $\Delta$ be a conference graph on a set $B$ of $p$ vertices, $\varepsilon_{ab}=+1$ on edges and $-1$ on non-edges.
 \emph{Template data} consist of
 \begin{enumerate}
-\item[(T1)] for each $i\in B$ a set $\mathcal L_i$ of $(q+1)/2$ lines; the fibre $\Phi_i$ is the Cayley graph on
+\item[(T1)] for each $i\in B$ a set $\mathcal L_i$ of $(q+1)/2$ lines; the fiber $\Phi_i$ is the Cayley graph on
 $(V,+)$ with connection set $\bigcup_{L\in\mathcal L_i}L\setminus\{0\}$, a strongly regular graph of Latin square
 type~\cite{CalderbankKantor1986};
 \item[(T2)] a regular tournament on $B$;
@@ -131,7 +131,7 @@ forms are exactly the lines in $\mathcal L_i$, each once;
 \item[(T4)] for each arc a set $T_{ab}=\alpha Q+\beta$ if $\varepsilon_{ab}=+1$ and $\alpha(\{0\}\cup N)+\beta$ if
 $\varepsilon_{ab}=-1$ ($\alpha\in\F_q^\times$, $\beta\in\F_q$).
 \end{enumerate}
-The graph has vertex set $B\times V$, fibre $\Phi_i$ on $\{i\}\times V$, and $(a,u)\sim(b,v)$ for an arc $a\to b$ iff
+The graph has vertex set $B\times V$, fiber $\Phi_i$ on $\{i\}\times V$, and $(a,u)\sim(b,v)$ for an arc $a\to b$ iff
 $f^+_{ab}(u)-f^-_{ab}(v)\in T_{ab}$.
 \end{definition}
 
@@ -143,12 +143,12 @@ $S_{ab}=J-2E_{ab}$ with $E_{ab}(u,v)=[f^+_{ab}(u)-f^-_{ab}(v)\in T_{ab}]$, and $
 \begin{enumerate}
 \item[(F1)] $S_{ii}\one=0$, and $S_{ii}$ acts on $F^D$ by $-q$ if $D\in\mathcal L_i$ and by $+q$ if $D\notin\mathcal L_i$.
 \item[(F2)] $S_{ab}\one=\varepsilon_{ab}q\one$ for $a\ne b$.
-\item[(F3)] Let $a\to b$ be an arc and $T=T_{ab}$. Then $S_{ab}$ kills $F^D$ on fibre $b$ for $D\ne\ker f^-_{ab}$, and
+\item[(F3)] Let $a\to b$ be an arc and $T=T_{ab}$. Then $S_{ab}$ kills $F^D$ on fiber $b$ for $D\ne\ker f^-_{ab}$, and
 \[S_{ab}(\varphi\circ f^-_{ab})=-2q\,(\one_T*\varphi)\circ f^+_{ab}\in F^{\ker f^+_{ab}},\qquad
 (\one_T*\varphi)(y)=\sum_{t\in T}\varphi(y-t);\]
-$S_{ba}$ kills $F^D$ on fibre $a$ for $D\ne\ker f^+_{ab}$ and sends $\varphi\circ f^+_{ab}$ to
+$S_{ba}$ kills $F^D$ on fiber $a$ for $D\ne\ker f^+_{ab}$ and sends $\varphi\circ f^+_{ab}$ to
 $-2q\bigl(\sum_{t\in T}\varphi(\cdot+t)\bigr)\circ f^-_{ab}$.
-\item[(F4)] At every fibre $a$, each line $D$ is the kernel of the form at $a$ of exactly one arc at $a$. If $j$ is the
+\item[(F4)] At every fiber $a$, each line $D$ is the kernel of the form at $a$ of exactly one arc at $a$. If $j$ is the
 other end of this arc and $D'$ the kernel of its form at $j$, we call $(j,D')$ the \emph{partner} of $(a,D)$.
 Partnering is an involution, and for the partners $(a,\ker f^+_{ab})$, $(b,\ker f^-_{ab})$ of an arc $a\to b$ we have
 $\ker f^+_{ab}\notin\mathcal L_a$ and $\ker f^-_{ab}\in\mathcal L_b$.
@@ -160,11 +160,11 @@ $L\setminus\{0\}$ onto $\F_q^\times$, so $\sum_{w\in L\setminus0}\varphi(\theta(
 $(q-1)\varphi(\theta(u))$. Hence $A(\Phi_i)$ acts on $F^D$ by $(q-1)/2$ if $D\in\mathcal L_i$ and by $-(q+1)/2$ otherwise,
 and $S_{ii}=J-I-2A(\Phi_i)$ acts by $-q$ and $+q$.
 
-(F2) For an arc $a\to b$, every vertex of fibre $a$ has $q|T_{ab}|$ neighbours in fibre $b$, and every vertex of fibre
-$b$ has $q|T_{ab}|$ neighbours in fibre $a$. By (T4), $|T_{ab}|=(q-\varepsilon_{ab})/2$, so
+(F2) For an arc $a\to b$, every vertex of fiber $a$ has $q|T_{ab}|$ neighbors in fiber $b$, and every vertex of fiber
+$b$ has $q|T_{ab}|$ neighbors in fiber $a$. By (T4), $|T_{ab}|=(q-\varepsilon_{ab})/2$, so
 $S_{ab}\one=(q^2-2q|T_{ab}|)\one=\varepsilon_{ab}q\one$, and likewise $S_{ba}\one=\varepsilon_{ab}q\one$.
 
-(F3) Let $\varphi\circ\theta\in F^D$ on fibre $b$; $J$ kills it. If $D\ne\ker f^-_{ab}$, then
+(F3) Let $\varphi\circ\theta\in F^D$ on fiber $b$; $J$ kills it. If $D\ne\ker f^-_{ab}$, then
 $(f^-_{ab},\theta)\colon V\to\F_q^2$ is a bijection and $(E_{ab}(\varphi\circ\theta))(u)=|T|\sum_r\varphi(r)=0$. If
 $D=\ker f^-_{ab}$, take $\theta=f^-_{ab}$; each level set of $f^-_{ab}$ has $q$ points, which gives the formula. The
 statements for $S_{ba}$ follow in the same way.
@@ -179,7 +179,7 @@ For all template data the Seidel matrix $S$ of the graph together with $\infty$ 
 regular with eigenvalues $\pm q\sqrt p$.
 \end{proposition}
 \begin{proof}
-For $a\in B$ and a line $D$ write $F^D(a)$ for the space $F^D$ on fibre $a$. By Lemma~\ref{lem:blocks}, $S$
+For $a\in B$ and a line $D$ write $F^D(a)$ for the space $F^D$ on fiber $a$. By Lemma~\ref{lem:blocks}, $S$
 preserves the span $W_0$ of $e_\infty$ and the $\one_a$ ($a\in B$), by (F1), (F2) and $S_{\infty i}=\one^\top$. It also
 preserves, for every partner pair $(a,D)$, $(b,D')$ on an arc $a\to b$, the space $W_{a,D}=F^D(a)\oplus F^{D'}(b)$, by
 (F1), (F3), (F4) and because $\one^\top$ kills mean-zero functions. By (F4) these spaces together span all functions on the
@@ -193,10 +193,10 @@ $\bigl(\begin{smallmatrix}q&-2qC\\-2qC^*&-q\end{smallmatrix}\bigr)$, where $C$ i
 convolution with $\one_{-T}$, is its adjoint. The square is $q^2(I+4CC^*)\oplus q^2(I+4C^*C)$. Convolutions commute,
 and $CC^*$ acts on mean-zero functions by $|\hat\one_T(\psi)|^2=(q+1)/4$ for every non-trivial character $\psi$ of
 $\F_q$, since $T$ is $\alpha Q+\beta$ or $\alpha(\{0\}\cup N)+\beta$ by (T4) and $q\equiv3\pmod4$. So $S^2=q^2(q+2)I=pq^2I$
-on $W_{a,D}$ as well. For the Paley-fibre data this is
+on $W_{a,D}$ as well. For the Paley-fiber data this is
 also~\cite[Proposition~6.6]{K833} (there with $p$ and $q$ interchanged), and for the instances of Mathon's Theorem~4.1 it is that
 theorem~\cite{Mathon1978} (Lemma~\ref{lem:mathon-instance}). We also verified $S^2=pq^2I$ entry by entry for $\OM$, $\OP$ and, at
-$q=23$, for two two-graphs on $13226$ points (Mathon's, and the instance with $\Pal(529)$ fibres over $\Pal(25)$), on
+$q=23$, for two two-graphs on $13226$ points (Mathon's, and the instance with $\Pal(529)$ fibers over $\Pal(25)$), on
 all $174\,927\,076$ entries.
 \end{proof}
 
@@ -238,9 +238,9 @@ For $q$ prime, every instance of Mathon's Theorem~4.1 is an instance of Definiti
 \begin{proof}
 See~\cite[Section~6.5]{K833}. In the literal transcription of Mathon's (3.1)--(3.6):
 \begin{itemize}
-\item the fibre $A_d$ is the Cayley graph on $\F_q^2$ with the $(q+1)/2$ lines of slopes $\{0\}\cup Q$, which is (T1);
+\item the fiber $A_d$ is the Cayley graph on $\F_q^2$ with the $(q+1)/2$ lines of slopes $\{0\}\cup Q$, which is (T1);
 \item each of $A_1,\dots,A_{(p-1)/2}$ is a line incidence $[f(u)-f'(v)\in T]$ with tail form $\ell_{-c_k}$ (slope in
-$N$, outside the fibre's lines) and head form $\ell_{c_k}$ (slope in $Q$, inside), with $\ell_\infty,\ell_0$ for
+$N$, outside the fiber's lines) and head form $\ell_{c_k}$ (slope in $Q$, inside), with $\ell_\infty,\ell_0$ for
 $k=\frac{p-1}2$; the tail kernels are pairwise distinct, as are the head kernels, and $T=N$ on base edges and
 $T=\{0\}\cup Q$ on non-edges; this is (T3)--(T4);
 \item every row of the skew Latin square contains each of $\pm1,\dots,\pm\frac{p-1}2$ once, which gives the regular
@@ -250,16 +250,16 @@ tournament (T2).\qedhere
 
 \paragraph{The two instances at $q=7$.} Both have base $B=\Z_9$ with $\Delta=\Pal(9)$, the $3\times3$ rook's graph
 ($a\sim b$ iff $a\equiv b\pmod3$ or $\lfloor a/3\rfloor=\lfloor b/3\rfloor$), the circulant tournament $i\to i+d$
-($d=1,2,3,4$), the same lines $\mathcal L_i$ on every fibre, and arc data depending only on $d$ (Table~\ref{tab:arcs}).
+($d=1,2,3,4$), the same lines $\mathcal L_i$ on every fiber, and arc data depending only on $d$ (Table~\ref{tab:arcs}).
 A vertex is $(i,u)$ with $u=(x,y)\in\F_7^2$, and in Table~\ref{tab:arcs} the pair $(\alpha,\beta)$ denotes the form
 $u\mapsto\alpha x+\beta y$. For $\OM$, $(x,y)$ are Mathon's coordinates $(a,b)$, so $\ell_m=(-m,1)$ and $\ell_\infty=(1,0)$.
 
 For $\OM$ the lines are those of slopes $\{0\}\cup Q=\{0,1,2,4\}$. The second two-graph $\OP$ has $\Pal(49)$ on every
-fibre: with $\F_{49}=\F_7[w]$, $w^2=3$, and $u\mapsto x+yw$, the four lines whose non-zero points are the squares of
+fiber: with $\F_{49}=\F_7[w]$, $w^2=3$, and $u\mapsto x+yw$, the four lines whose non-zero points are the squares of
 $\F_{49}$ are those of slopes $0,3,4,\infty$. Both data satisfy (T1)--(T4), and both graphs on $441$ vertices are
 $\srg(441,220,109,110)$.
 
-$\OP$ is the case $d=1$, in the notation of~\cite{K833}, of the Paley-fibre template there ($\Pal(q^2)$ fibres over a conference graph on
+$\OP$ is the case $d=1$, in the notation of~\cite{K833}, of the Paley-fiber template there ($\Pal(q^2)$ fibers over a conference graph on
 $q+2$ points, one line incidence per direction), so it too lies in a family in $q$, and Proposition~\ref{prop:q23all}
 covers its members at $q=23$.
 
@@ -282,28 +282,28 @@ $\{i,i+d\}$ is an edge of $\Pal(9)$). For $\OM$, $f^\pm=(\pm m,1)$ with $m=3^{2d
 \end{table}
 
 That $\OP$ and $\OM$ are not isomorphic is~\cite[Computation~6.7]{K833}. Already at order $46$ Mathon's Theorem~4.1
-gives four inequivalent conference matrices, one for each of four labellings of the pentagon; his two inequivalent
+gives four inequivalent conference matrices, one for each of four labelings of the pentagon; his two inequivalent
 skew Latin squares of order $5$ give the same four~\cite[p.~330]{Mathon1978}. On $442$ points, other choices of the
 template data (not only of the directions) give further two-graphs; with $\OM$ and $\OP$ there are at least $23$,
 pairwise non-isomorphic by two two-graph invariants (Table~\ref{tab:programs}; Figure~\ref{fig:flow}). The first counts,
 for points $x$, $y$, the $5$-point sets containing $x$ and $y$ all of whose ten triples belong to the two-graph
 (equivalently, the $4$-cliques through $y$ in the descendant at $x$), and takes the multiset of the sorted rows,
-refined by colour refinement. The second hashes each descendant $D_x$ by the numbers of edges inside the common
-neighbourhoods of its pairs of vertices, and takes the multiset of the $442$ hashes. Only $\OM$ and $\OP$ enter the
+refined by color refinement. The second hashes each descendant $D_x$ by the numbers of edges inside the common
+neighborhoods of its pairs of vertices, and takes the multiset of the $442$ hashes. Only $\OM$ and $\OP$ enter the
 census.
 
 \section{Line-piece members and the census}\label{sec:census}
 
 \subsection{Decoupling}\label{sec:decoupling}
-A vector $x$ with $x_\infty=1$ is a \emph{line-piece vector} if on every fibre $x(i,u)=g_i(\theta_i(u))$ for a non-zero linear
-form $\theta_i$ and a function $g_i\colon\F_q\to\{\pm1\}$ (constant $g_i$ allowed); equivalently, every fibre meets the
+A vector $x$ with $x_\infty=1$ is a \emph{line-piece vector} if on every fiber $x(i,u)=g_i(\theta_i(u))$ for a non-zero linear
+form $\theta_i$ and a function $g_i\colon\F_q\to\{\pm1\}$ (constant $g_i$ allowed); equivalently, every fiber meets the
 switching set in a union of parallel lines. Put $M_i=\sum_{s\in\F_q}g_i(s)$.
 
 \begin{lemma}[decoupling]\label{lem:decouple}
 Let $x$ be a line-piece vector with $Sx=\rho x$, where $\rho\ne\pm q$ (for regular members $\rho=\pm q\sqrt p$, so this
 always holds). Let $\tilde g_i=g_i-M_i/q$ be the mean-zero part of $g_i$.
 \begin{enumerate}
-\item[(D1)] The fibres with non-constant $g_i$ are matched in pairs along arcs. On a matched arc $a\to b$ we have
+\item[(D1)] The fibers with non-constant $g_i$ are matched in pairs along arcs. On a matched arc $a\to b$ we have
 $\ker\theta_a=\ker f^+_{ab}$ and $\ker\theta_b=\ker f^-_{ab}$; replacing $g_i$ by $g_i(\lambda\,\cdot)$, we may take
 $\theta_a=f^+_{ab}$ and $\theta_b=f^-_{ab}$.
 \item[(D2)] On every matched arc $a\to b$, with $T=T_{ab}$ and for all $y\in\F_q$,
@@ -314,41 +314,41 @@ $\theta_a=f^+_{ab}$ and $\theta_b=f^-_{ab}$.
 \begin{proof}
 We use Lemma~\ref{lem:blocks}.
 
-Write $x_i=\frac{M_i}{q}\one+\tilde g_i\circ\theta_i$. Fix a fibre $a$ and a line $D$, and project the fibre-$a$ rows of
+Write $x_i=\frac{M_i}{q}\one+\tilde g_i\circ\theta_i$. Fix a fiber $a$ and a line $D$, and project the fiber-$a$ rows of
 $Sx=\rho x$ onto $F^D$. Let $\sigma_a(D)=-1$ if $D\in\mathcal L_a$ and $+1$ otherwise. By (F1), the block $S_{aa}$
 contributes $\sigma_a(D)\,q\,\tilde g_a\circ\theta_a$ if $D=\ker\theta_a$, and nothing otherwise. By (F2)--(F4), and since the column of $\infty$ is constant, the
 only other contribution is $S_{aj}(\tilde g_j\circ\theta_j)$ from the partner $(j,D')$, and it occurs only when
 $\ker\theta_j=D'$. Suppose $\tilde g_a\ne0$ and take $D=\ker\theta_a$. The projection reads
 \[(\sigma_a(D)\,q-\rho)\,\tilde g_a\circ\theta_a=-S_{aj}(\tilde g_j\circ\theta_j)\quad\text{if }\ker\theta_j=D',\]
 and $(\sigma_a(D)\,q-\rho)\,\tilde g_a\circ\theta_a=0$ otherwise. The left side is non-zero because $\rho\ne\pm q$.
-Hence $\ker\theta_j=D'$ and $\tilde g_j\ne0$. Since partnering is an involution, the non-constant fibres are matched in
+Hence $\ker\theta_j=D'$ and $\tilde g_j\ne0$. Since partnering is an involution, the non-constant fibers are matched in
 pairs along arcs, with the kernels of the arc's forms; this is (D1).
 
 On a matched arc $a\to b$, (T3) gives $\sigma_a=+1$ at $\ker f^+_{ab}\notin\mathcal L_a$ and $\sigma_b=-1$ at
 $\ker f^-_{ab}\in\mathcal L_b$, so the two projections read $q\tilde g_a-2q\,\one_T*\tilde g_b=\rho\tilde g_a$ and
 $-q\tilde g_b-2q\sum_t\tilde g_a(\cdot+t)=\rho\tilde g_b$; this is (D2). The non-constant parts are mapped to mean-zero
-functions, so by (F1)--(F2) the constant part of the fibre-$a$ rows is $1+\sum_{b\ne a}\varepsilon_{ab}M_b=\rho M_a/q$,
+functions, so by (F1)--(F2) the constant part of the fiber-$a$ rows is $1+\sum_{b\ne a}\varepsilon_{ab}M_b=\rho M_a/q$,
 and the row of $\infty$ is $\sum_i\sum_ux_i(u)=q\sum_iM_i=\rho$; this is (D3).
 \end{proof}
 
-\subsection{Frames and centred members}
+\subsection{Frames and centered members}
 Let $h$ be the map $(i,u)\mapsto(i,2u)$ fixing $\infty$. For $\OM$ and $\OP$ it is an automorphism that fixes every
-fibre (the sets $T$ of Table~\ref{tab:arcs} are unions of $\{0\},Q,N$, and $2\in Q$). For $\OM$,
+fiber (the sets $T$ of Table~\ref{tab:arcs} are unions of $\{0\},Q,N$, and $2\in Q$). For $\OM$,
 $\Aut\Omega=\langle h,t\rangle\cong C_3\times C_3$, where $t\colon(i,u)\mapsto(i+3,u)$ translates the base~\cite[Proposition~2.3]{Plummer442};
 $\Aut\OP$ is also $C_3\times C_3$ (Table~\ref{tab:programs}). Indeed, the descendant of $\OP$ at $\infty$ is isomorphic to
 no other descendant, so $\Aut\OP$ fixes $\infty$ and equals the automorphism group of that descendant, which nauty
 gives as $C_3\times C_3$. Every isomorphism between two graphs of one switching class
 is an automorphism of the two-graph, so the isomorphism classes of members are the $\Aut\Omega$-orbits, and the
-automorphism group of a member is its stabiliser in $\Aut\Omega$~\cite[Lemma~2.4]{Plummer442}.
+automorphism group of a member is its stabilizer in $\Aut\Omega$~\cite[Lemma~2.4]{Plummer442}.
 
-By Lemma~\ref{lem:decouple}, the fibres on which a line-piece member is not constant come in pairs along arcs.
-By (T3), each pair joins a piece in a direction of the net of one fibre to a piece in a direction outside the net of
+By Lemma~\ref{lem:decouple}, the fibers on which a line-piece member is not constant come in pairs along arcs.
+By (T3), each pair joins a piece in a direction of the net of one fiber to a piece in a direction outside the net of
 the other (Figure~\ref{fig:member}). On a matched arc, the $14$ solutions of (D2) fall into two \emph{sign classes},
 each consisting of the $7$ translates $g(\cdot-c)$, $c\in\F_7$, of one solution.
 
 \begin{definition}
 The \emph{frame} of a line-piece member consists of its matched arcs, the sign class of its solution on each matched
-arc, and the sign of $x$ on each constant fibre.
+arc, and the sign of $x$ on each constant fiber.
 \end{definition}
 
 The census (Theorem~\ref{thm:census}) shows that for each two-graph and degree there are $15$ frames. Each frame has
@@ -357,22 +357,22 @@ accounts for all $5145=15\cdot7^3$ line-piece members per degree.
 
 Exactly one member of each frame is fixed by $h$. In each sign class there is one solution whose intercept set is a
 union of $\{0\}$, $Q$, $N$. Since $h$ multiplies by $2\in Q$, it maps the translate of this solution by $c$ to its
-translate by $c/2$, so a member is fixed by $h$ only if $c=0$ on every pair. We call this member the \emph{centred}
-member of its frame. The centred members of $\OM$ are the graphs of~\cite{Plummer442}.
+translate by $c/2$, so a member is fixed by $h$ only if $c=0$ on every pair. We call this member the \emph{centered}
+member of its frame. The centered members of $\OM$ are the graphs of~\cite{Plummer442}.
 
 The group $\Aut\Omega\cong C_3\times C_3$ permutes the frames. In degree $231$ the $15$ frames form $5$ orbits of
 length $3$; in degree $210$ they form $3$ orbits of length $3$ and $6$ fixed frames. Each orbit of length $3$ holds
-$115$ isomorphism classes ($114$ rigid ones and the centred one), and each fixed frame holds $43$. This gives
+$115$ isomorphism classes ($114$ rigid ones and the centered one), and each fixed frame holds $43$. This gives
 $575=5\cdot115$ and $603=3\cdot115+6\cdot43$.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{member.pdf}
-\caption{A line-piece member of $\OM$ of degree $231$ (a solution of $Sx=-21x$); it is not centred.
-(a)~The base $\Z_9$ with the tournament $i\to i+\{1,\dots,4\}$ (grey), points coloured by the kind of piece on their
-fibre. The black arrows $0\to3$, $7\to1$, $5\to8$ are the decoupled pairs (Lemma~\ref{lem:decouple}).
-(b)~The fibres, one row per pair, and the whole fibres $2$, $4$, $6$. In each $7\times7$ grid ($a$ indexes rows, $b$
-columns) the coloured cells form $X$. Fibres $1$, $3$, $8$ meet $X$ in three lines $b-a=c$, a net direction; fibres
+\caption{A line-piece member of $\OM$ of degree $231$ (a solution of $Sx=-21x$); it is not centered.
+(a)~The base $\Z_9$ with the tournament $i\to i+\{1,\dots,4\}$ (gray), points colored by the kind of piece on their
+fiber. The black arrows $0\to3$, $7\to1$, $5\to8$ are the decoupled pairs (Lemma~\ref{lem:decouple}).
+(b)~The fibers, one row per pair, and the whole fibers $2$, $4$, $6$. In each $7\times7$ grid ($a$ indexes rows, $b$
+columns) the colored cells form $X$. Fibers $1$, $3$, $8$ meet $X$ in three lines $b-a=c$, a net direction; fibers
 $0$, $5$, $7$ meet it in one line $b+a=c$, outside the net.}
 \label{fig:member}
 \end{figure}
@@ -391,9 +391,9 @@ Combining these with (D3) gives all line-piece members, and each resulting graph
 strongly regular.
 
 Isomorphism classes of members are $\Aut\Omega$-orbits~\cite[Lemma~2.4]{Plummer442}, so we keep one member per
-orbit. Two independent canonical labellings confirm that the $2356$ graphs are pairwise non-isomorphic: a program
+orbit. Two independent canonical labelings confirm that the $2356$ graphs are pairwise non-isomorphic: a program
 written for this purpose, and bliss~\cite{bliss} via igraph~\cite{igraph}. The second computation also gives the
-automorphism groups in Table~\ref{tab:aut}. Expanding the representatives back to labelled vectors gives $5145$
+automorphism groups in Table~\ref{tab:aut}. Expanding the representatives back to labeled vectors gives $5145$
 vectors per degree and two-graph, as the frame decomposition predicts. As a control, the enumeration reproduces the
 $15$ solutions per degree on $\OM$ of~\cite[Theorem~3.2]{Plummer442}, together with their graphs. The programs are
 listed in Table~\ref{tab:programs}.
@@ -406,7 +406,7 @@ listed in Table~\ref{tab:programs}.
 \caption{Automorphism groups of the $2356$ census graphs, by two-graph and degree (members of degree $210$ through
 their complements). Each column gives $|\Aut|$ and the orbit lengths on the $442$ vertices. Numbers in brackets count
 graphs known before the census: for $\OM$ the $14$ graphs of~\cite{Plummer442}, for $\OP$ $15$ members found earlier
-with the same line-piece program ($14$ centred, $1$ rigid). So $29$ of the $2356$ graphs were known before.}
+with the same line-piece program ($14$ centered, $1$ rigid). So $29$ of the $2356$ graphs were known before.}
 \label{tab:aut}
 \end{table}
 
@@ -425,19 +425,19 @@ which gives a statement on line pieces for all of them, with arbitrary intercept
 \begin{proposition}\label{prop:q23all}
 Let $\Omega$ be the two-graph of any template data with $q=23$ ($n=13226$). There is no line-piece vector $x$ with
 $Sx=\pm115\,x$. Hence $\Omega$ has no $\srg(13226,6555,3248,3249)$ and no $\srg(13226,6670,3363,3364)$ member whose
-switching set meets every fibre in a union of parallel lines.
+switching set meets every fiber in a union of parallel lines.
 \end{proposition}
 \begin{proof}
-By (D1), every non-constant fibre lies on a matched arc and satisfies (D2). If $T'=\alpha T+\beta$, then $(g_a,g_b)$
+By (D1), every non-constant fiber lies on a matched arc and satisfies (D2). If $T'=\alpha T+\beta$, then $(g_a,g_b)$
 solves (D2) for $T$ if and only if $(g_a',g_b')$ with $g_a'(y)=g_a(\alpha^{-1}(y-\beta))$ and
 $g_b'(y)=g_b(\alpha^{-1}y)$ solves it for $T'$. So it suffices to take $T\in\{Q,N,\{0\}\cup Q,\{0\}\cup N\}$. An
 exhaustive search over all $2^{23}$ functions $g$, for these four sets and both $\rho=\pm115$, finds no solution. Hence
-every fibre is constant, $M_i=23c_i$ with $c_i=\pm1$, and (D3) reads
+every fiber is constant, $M_i=23c_i$ with $c_i=\pm1$, and (D3) reads
 $1+23\sum_{j\ne i}\varepsilon_{ij}c_j=\pm5\cdot23\,c_i$, which is impossible modulo $23$.
 \end{proof}
 As a control, the same program at $q=7$ finds $14$ solutions per arc and $5145$ vectors per degree, as in the census.
 Independently, CP-SAT~\cite{CPSAT} finds no regular member of $\Omega_{23}$ (Section~\ref{sec:sporadic}) in the line-piece
-model of~\cite{Plummer442}, where every fibre is empty, whole, or $\ell_m^{-1}(T)$ with $T$ a union of $\{0\},Q,N$, for
+model of~\cite{Plummer442}, where every fiber is empty, whole, or $\ell_m^{-1}(T)$ with $T$ a union of $\{0\},Q,N$, for
 either degree.
 
 % ---------------------------------------------------------------------------------------------------------------
@@ -484,10 +484,10 @@ the full hashes are in \code{koval/README.md}. Programs and data:
 \begin{question}
 Does any template two-graph on $13226$ points, or any two-graph from Mathon's Theorem~4.2, have a regular member? By
 Proposition~\ref{prop:q23all}, the switching set of such a member of a template two-graph is not a union of parallel
-lines on some fibre.
+lines on some fiber.
 \end{question}
 \begin{question}
-Is the template two-graph with $\Pal(529)$ fibres on $13226$ points also free of $h$-invariant regular members?
+Is the template two-graph with $\Pal(529)$ fibers on $13226$ points also free of $h$-invariant regular members?
 (Theorem~\ref{thm:sporadic} already holds for it, Remark~\ref{rem:alltemplates}.)
 \end{question}
 \begin{conjecture}\label{conj:twoval}

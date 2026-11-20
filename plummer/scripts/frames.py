@@ -1,11 +1,11 @@
-"""Frames of the line-piece members (Kovac's census expanded to labelled switching sets).
+"""Frames of the line-piece members (Kovac's census expanded to labeled switching sets).
 python -I frames.py CENSUSDIR OUT.tsv
 
 For each two-graph (mathon = Omega_M, ours = Omega_K) and degree, every census class is expanded under Aut(Omega) to its
-labelled switching sets x (x = N(oo) of the member of that degree, oo not switched). The frame of x records per fibre:
+labeled switching sets x (x = N(oo) of the member of that degree, oo not switched). The frame of x records per fiber:
 W / E (whole / empty) or "t{clq|coc}m": x is the union of t parallel lines of the form b - m a (m = inf: the form a),
-which are cliques (net direction) or cocliques of the fibre's graph. Checked and written per frame: number of labelled
-sets, the decoupled pairs and the number of choices on each, the members fixed by the fibre-fixing C3 (centred
+which are cliques (net direction) or cocliques of the fiber's graph. Checked and written per frame: number of labeled
+sets, the decoupled pairs and the number of choices on each, the members fixed by the fiber-fixing C3 (centered
 members), the orbit of the frame under Aut(Omega), and the census classes meeting it by |Aut| and orbit type."""
 import sys, os, collections
 import numpy as np, igraph as ig

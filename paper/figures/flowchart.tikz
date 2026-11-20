@@ -1,6 +1,6 @@
 % Flowchart: inputs -> template -> regular two-graphs on 442 points -> line-piece members -> census -> the 2356 graphs.
 % \input this inside a figure; needs \usetikzlibrary{positioning,calc,arrows.meta,fit,backgrounds} and \F, \srg, \Aut.
-% Colour code as in Figure 2: blue = line(s) in a net direction, orange = outside the net, grey = whole fibre.
+% Color code as in Figure 2: blue = line(s) in a net direction, orange = outside the net, gray = whole fiber.
 % The small drawings use the example member of Figure 2 (its pair 0 -> 3 and its frame).
 % NOTE: Kovaľ's email gives "2 x 7 solutions per pair"; within a fixed frame the census has exactly 7 per pair.
 \begin{tikzpicture}[x=1mm, y=1mm, font=\small,
@@ -40,7 +40,7 @@
 \end{scope}
 
 \draw[inbox] (81,3) rectangle (156,-35);
-\node[ctxt] at (118.5,0) {\textbf{fibre}: $AG(2,7)=\F_7^2$};
+\node[ctxt] at (118.5,0) {\textbf{fiber}: $AG(2,7)=\F_7^2$};
 \begin{scope}[shift={(97,-15)}]                                  % 7 x 7 points, row a, column b
   \begin{scope}[scale=1.35]
   \foreach \a in {0,...,6} \foreach \b in {0,...,6} \fill[black!35] (1.6*\b-4.8, -1.6*\a+4.8) circle (0.22);
@@ -58,10 +58,10 @@
 
 % =========================================================================== template
 \node[txt, text width=120mm, anchor=north west] (tT) at (33,-44)
-  {\textbf{template}: the blocks between fibres are line incidences, signed by Paley$(9)$ and the tournament.
+  {\textbf{template}: the blocks between fibers are line incidences, signed by Paley$(9)$ and the tournament.
    This gives a conference graph $\srg(441,220,109,110)$, and with an isolated point $\infty$ a regular two-graph
    on $442$ points (Seidel eigenvalues $\pm21$).};
-\begin{scope}[shift={(13,-51)}]                                   % nine fibres on the base, and oo
+\begin{scope}[shift={(13,-51)}]                                   % nine fibers on the base, and oo
   \foreach \i in {0,...,8} {\pgfmathtruncatemacro\r{\i/3}\pgfmathtruncatemacro\c{mod(\i,3)}
     \draw[black!70, fill=white] (4.4*\c-6.6, -4.4*\r+6.6) rectangle ++(3.6,-3.6);}
   \node[dot] (oo) at (10.5,0) {}; \node[font=\scriptsize, right] at (oo.east) {$\infty$};
@@ -75,7 +75,7 @@
 \node[ibox, below=8mm of T.south west, anchor=north west] (OM)
   {$\Omega_{\mathrm M}$: Mathon \cite{Mathon1978}, Thm~4.1;\\ net directions $\{0\}\cup Q$};
 \node[ibox, below=8mm of T.south, anchor=north] (OK)
-  {$\Omega_{\mathrm P}$: Paley$(49)$ on each fibre};
+  {$\Omega_{\mathrm P}$: Paley$(49)$ on each fiber};
 \node[fbox, below=8mm of T.south east, anchor=north east] (OF)
   {$\ge21$ further two-graphs\\ (not counted here)};
 \foreach \n in {OM, OK} \draw[arr] (T.south -| \n) -- (\n.north);
@@ -84,9 +84,9 @@
 % =========================================================================== members
 \node[txt, text width=118mm, anchor=north west] (mT) at ($(OM.south west)+(2.5,-10.5)$)
   {\textbf{members}: switching sets $X$ with $Sx=\rho x$; degree $231$ for $\rho=-21$, $210$ for $\rho=+21$.\\[1pt]
-   \textbf{line pieces}: on each fibre, $X$ is a union of parallel lines, the whole fibre, or empty.\\[1pt]
-   \textbf{decoupling}: the fibres carrying lines come in pairs along arcs of the tournament (in the census:
-   three pairs, and three fibres whole or empty); each pair joins \sw{cnon}\ lines outside the net to \sw{cnet}\ lines in a net direction.};
+   \textbf{line pieces}: on each fiber, $X$ is a union of parallel lines, the whole fiber, or empty.\\[1pt]
+   \textbf{decoupling}: the fibers carrying lines come in pairs along arcs of the tournament (in the census:
+   three pairs, and three fibers whole or empty); each pair joins \sw{cnon}\ lines outside the net to \sw{cnet}\ lines in a net direction.};
 \begin{scope}[shift={($(mT.north east)+(6,-1)$)}]                  % the pair 0 -> 3 of Figure 2
   \foreach \a in {0,...,6} \foreach \b in {0,...,6} {
     \pgfmathtruncatemacro\u{mod(\a+\b,7)==6}\pgfmathtruncatemacro\v{or(or(mod(\b-\a+7,7)==0, mod(\b-\a+7,7)==1), mod(\b-\a+7,7)==3)}
@@ -94,7 +94,7 @@
     \ifnum\v=1 \fill[cnet] (1.4*\b+16, -1.4*\a) rectangle ++(1.4,-1.4); \fi}
   \draw[black!70] (0,0) rectangle (9.8,-9.8); \draw[black!70] (16,0) rectangle (25.8,-9.8);
   \draw[arr, thick, draw=black!85] (10.6,-4.9) -- (15.2,-4.9);
-  \node[lab, font=\scriptsize] at (4.9,-12) {fibre $0$}; \node[lab, font=\scriptsize] at (20.9,-12) {fibre $3$};
+  \node[lab, font=\scriptsize] at (4.9,-12) {fiber $0$}; \node[lab, font=\scriptsize] at (20.9,-12) {fiber $3$};
   \coordinate (mi) at (27,-13.5);
 \end{scope}
 \begin{scope}[on background layer]\node[fitbox, fill=white, fit=(mT)(mi)] (P) {};\end{scope}
@@ -111,8 +111,8 @@
 \end{scope}
 \node[txt, text width=134mm, anchor=north west] (cT) at ($(ci1)+(17,-0.5)$)
   {\textbf{census}, for $\Omega_{\mathrm M}$ and $\Omega_{\mathrm P}$ alike: in each degree $5145=15\cdot7^3$ members.
-   The \emph{frame} of a member says which fibres are whole or empty, which carry how many lines of which kind, and how
-   the fibres with lines are paired (two of the $15$ frames of degree $210$ have the same fibre types and differ only in the
+   The \emph{frame} of a member says which fibers are whole or empty, which carry how many lines of which kind, and how
+   the fibers with lines are paired (two of the $15$ frames of degree $210$ have the same fiber types and differ only in the
    pairing); each frame holds $7$ choices on each of its three pairs (Figure~\ref{fig:member}).
    Up to $\Aut(\Omega)=C_3\times C_3$: $575$ classes of degree $231$ and $603$ of degree $210$.};
 \begin{scope}[on background layer]\node[fitbox, fill=white, fit=(cT)(ci1)(ci2)] (C) {};\end{scope}

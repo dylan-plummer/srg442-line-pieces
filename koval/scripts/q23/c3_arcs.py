@@ -1,7 +1,7 @@
-"""q = 23, step 1: per-arc line-piece solutions of the d = 1 template, for general q (fibre GF(q)^2, q prime = 3 mod 4).
+"""q = 23, step 1: per-arc line-piece solutions of the d = 1 template, for general q (fiber GF(q)^2, q prime = 3 mod 4).
 On an arc a -> b (tail direction l_a positive, head direction l_b negative, block E(u,v) = [l_a(u) - l_b(v) in T]) a
-switching vector x with x = g o l_a on fibre a and x = h o l_b on fibre b (g, h : F_q -> {+1,-1}, non-constant) gives
-S x = rho x on the non-constant parts of the two fibres iff, with s~ = s - mean(s),
+switching vector x with x = g o l_a on fiber a and x = h o l_b on fiber b (g, h : F_q -> {+1,-1}, non-constant) gives
+S x = rho x on the non-constant parts of the two fibers iff, with s~ = s - mean(s),
     head:  (rho + q) h~(w) = -2q sum_{t in T} g~(w + t)
     tail:  (rho - q) g~(w) = -2q sum_{t in T} h~(w - t).
 Enumerates all 2^q functions g (exhaustive), derives h from the head equation, checks both equations exactly in

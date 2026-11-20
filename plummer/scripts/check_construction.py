@@ -2,9 +2,9 @@
 """Standalone builder and verifier for the paper (plain Python, no packages, no code shared with the search).
 
 Builds Mathon's conference graph M = srg(441,220,109,110) for q = 7, p = 9 from the formulas of Construction 2.2, adds an
-isolated vertex oo, switches with respect to the set X of Construction 3.1, and checks by counting common neighbours
+isolated vertex oo, switches with respect to the set X of Construction 3.1, and checks by counting common neighbors
 of all pairs that the result is srg(442,231,120,121) and its complement srg(442,210,99,100). With a graph6 file as
-argument it also checks that the file is exactly the constructed (labelled) graph.
+argument it also checks that the file is exactly the constructed (labeled) graph.
 
 usage: python3 check_construction.py [../graphs/srg442_231_120_121.g6]
 """

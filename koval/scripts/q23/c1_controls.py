@@ -1,11 +1,11 @@
 """Controls of the template code (w1lib.py) on known graphs.
 (a) q = 3: literal Mathon blocks reproduce the printed (4.15) A_d, A_1, A_2 and the block pattern of A_I in (4.16);
     the 45-vertex graph is srg(45,22,10,11) and S^2 = 45 I.
-(b) q = 7, p = 9: literal Mathon build and Paley-fibre template build; S^2 = 441 I exactly; template build compared
+(b) q = 7, p = 9: literal Mathon build and Paley-fiber template build; S^2 = 441 I exactly; template build compared
     byte-for-byte with our archived srg_441_220_109_110_d1_z9.g6; two-graph comparison (pynauty certificate of the
     double cover = complete two-graph invariant) with data/mathon441_sage_t2.g6 = SageMath's
     graphs.MathonPseudocyclicStronglyRegularGraph(t=2), written with graph6_string().  That graph is a third regular
-    two-graph on 442 points (isomorphic to neither Mathon's literal build nor the Paley-fibre template build); it is
+    two-graph on 442 points (isomorphic to neither Mathon's literal build nor the Paley-fiber template build); it is
     NOT the file mathon441_plummer442.g6 used by scripts/census/P2_family442.py.
     Also needs data/srg_441_220_109_110_d1_z9.g6 (scripts/census/P2_family442.py base ours ...).
 usage, from koval/: python3 -I scripts/q23/c1_controls.py      (W1_NAUTY=1 adds the slow pynauty part)
@@ -88,7 +88,7 @@ rng = np.random.default_rng(20261102)
 certs = {}
 for name, A in (('mathon_literal_q7', AM), ('template_q7', AT), ('sage_mathon441_g6', M441)):
     certs[name] = {'twograph_cover': cover_cert(seidel_int(A)), 'graph': graph_cert(A)}
-# positive control for the invariant: random relabelling + random switching of the mathon literal Seidel matrix
+# positive control for the invariant: random relabeling + random switching of the mathon literal Seidel matrix
 S = seidel_int(AM); perm = rng.permutation(len(S)); x = rng.choice([-1, 1], size=len(S))
 S2 = S[np.ix_(perm, perm)] * x[:, None] * x[None, :]
 certs['mathon_literal_q7_relabel_switch'] = {'twograph_cover': cover_cert(S2)}

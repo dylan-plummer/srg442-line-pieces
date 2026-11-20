@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""P3 : regular members of a fibred regular two-graph on 442 points whose switching set is a
-union of LINE PIECES in every fibre (the reduction used by D. Plummer, github.com/dylan-plummer/srg442, there with
+"""P3 : regular members of a fibered regular two-graph on 442 points whose switching set is a
+union of LINE PIECES in every fiber (the reduction used by D. Plummer, github.com/dylan-plummer/srg442, there with
 h-invariant pieces only; this is our own implementation, written from the method description, none of his code run).
 
-Setting.  Omega = two-graph of M + {oo}, M a conference graph srg(441,220,109,110) with 9 fibres of 49 vertices,
+Setting.  Omega = two-graph of M + {oo}, M a conference graph srg(441,220,109,110) with 9 fibers of 49 vertices,
 vertex 49*B + 7*a + b <-> (B, (a,b) in F_7^2), oo = 441.  Seidel S (-1 adjacent, +1 non-adjacent, oo isolated in M+oo).
 A switching vector x in {+-1}^442 (x_oo = +1) gives a K-regular graph iff S x = rho x, rho = 441 - 2K.
 
-PIECE MODEL (a RESTRICTION, not a theorem): on every fibre B, the switched set is {u : g_B(l_d(u)) = 1} for one of
-the 8 parallel classes l_d of F_7^2 and an arbitrary g_B : F_7 -> {0,1} (constant g = empty/full fibre).
-  --restrict h   : additionally g_B(2t) = g_B(t) (Plummer's 50 options per fibre: unions of {0}, QR, NQR)
-  --restrict gen : arbitrary g_B (2 + 8*126 = 1010 options per fibre)
+PIECE MODEL (a RESTRICTION, not a theorem): on every fiber B, the switched set is {u : g_B(l_d(u)) = 1} for one of
+the 8 parallel classes l_d of F_7^2 and an arbitrary g_B : F_7 -> {0,1} (constant g = empty/full fiber).
+  --restrict h   : additionally g_B(2t) = g_B(t) (Plummer's 50 options per fiber: unions of {0}, QR, NQR)
+  --restrict gen : arbitrary g_B (2 + 8*126 = 1010 options per fiber)
 Encoding: one-hot y[B,d] (direction), bools g[B,t], w[B,d,t] = y[B,d] & g[B,t];  sw_u = sum_d w[B,d,l_d(u)];
 equations (S - rho I) sw = (S - rho I) 1 / 2, rewritten on line sums.  Constant g is pinned to direction 0
 (symmetry of the encoding).  All solutions are enumerated with blocking clauses; after every solution the whole orbit
@@ -18,9 +18,9 @@ under the given automorphism group of M (which fixes oo) is blocked, so every so
 COMPLETE = CP-SAT proves the blocked model INFEASIBLE.
 
 Subcommands (run from koval/; solve needs OR-Tools, the others numpy + pynauty):
-  recover TG.g6 MEMBERS.g6 OUT.json        # switching vectors of known members (direct labelling or nauty iso)
+  recover TG.g6 MEMBERS.g6 OUT.json        # switching vectors of known members (direct labeling or nauty iso)
   aut TG.g6 OUT.json                       # generators of Aut(M) (pynauty), closed into the group
-  structure TG.g6                          # Fourier check: which (fibre,line) sectors S couples
+  structure TG.g6                          # Fourier check: which (fiber,line) sectors S couples
   solve TG.g6 K RESTRICT AUT.json OUT.json [TLIM] [WORKERS] [MAXSOL] [CHECK.json]
   verify TG.g6 SOLS.json KNOWN.g6|- OUTDIR TAG
 """
@@ -127,12 +127,12 @@ def recover(tg, members, out):
     for idx, G in enumerate(read_g6_file(members)):
         ok, par = srg_check(G); SG = seidel(G); how = 'direct'
         x = SG[INF] * S0[INF]; x[INF] = 1
-        for pi, perm in enumerate(perms_cache):         # labellings found for earlier members
+        for pi, perm in enumerate(perms_cache):         # labelings found for earlier members
             if np.array_equal(SG, S0 * np.outer(x, x)): break
             SG = seidel(G)[np.ix_(perm, perm)]; x = SG[INF] * S0[INF]; x[INF] = 1; how = f'cached-iso#{pi}'
         if not np.array_equal(SG, S0 * np.outer(x, x)):
             SG = seidel(G); how = 'direct'
-            # labelling differs: find w with descendant(G, w) ~ M, map w -> oo via canonical labellings
+            # labeling differs: find w with descendant(G, w) ~ M, map w -> oo via canonical labelings
             import pynauty
             if certM is None:
                 gM = nauty_graph(M); certM = pynauty.certificate(gM); labM = pynauty.canon_label(gM)
@@ -146,7 +146,7 @@ def recover(tg, members, out):
                 if pynauty.certificate(gw) == certM:
                     labw = pynauty.canon_label(gw)
                     # canonical position c: Aw vertex labw[c] <-> M vertex labM[c]
-                    perm = np.empty(N, dtype=np.int64)               # perm[new index in M+oo labelling] = G vertex
+                    perm = np.empty(N, dtype=np.int64)               # perm[new index in M+oo labeling] = G vertex
                     for c in range(N0): perm[labM[c]] = keep[labw[c]]
                     perm[INF] = w
                     SGp = SG[np.ix_(perm, perm)]
@@ -186,18 +186,18 @@ def aut(tg, out):
     assert len(G) == order, (len(G), order)
     for p in G:
         P = np.array(p); assert np.array_equal(M[np.ix_(P, P)], M)
-    # does every element map fibres to fibres and lines to lines (piece model invariant)?
+    # does every element map fibers to fibers and lines to lines (piece model invariant)?
     fib = []
     for p in G:
         P = np.array(p); fib.append(all(len({P[49 * B + u] // 49 for u in range(49)}) == 1 for B in range(9)))
-    print('|Aut M| =', order, 'orbits', norb, 'fibre-preserving elements', sum(fib), flush=True)
+    print('|Aut M| =', order, 'orbits', norb, 'fiber-preserving elements', sum(fib), flush=True)
     json.dump(dict(order=order, group=[list(p) for p in G]), open(out, 'w'))
 
 
 # ---------------------------------------------------------------- structure (Fourier sectors)
 def structure(tg):
     M = read_g6_file(tg)[0]; S = seidel_plus_inf(M).astype(float)
-    # orthonormal basis of zero-mean functions of form d on a fibre: 6 vectors per (B,d)
+    # orthonormal basis of zero-mean functions of form d on a fiber: 6 vectors per (B,d)
     Pm = {}
     for d in range(8):
         F = np.zeros((49, 7))
@@ -223,7 +223,7 @@ def solve(tg, K, restrict, autf, out, tlim=3600.0, workers=4, maxsol=100000, che
     M = read_g6_file(tg)[0]; S0 = seidel_plus_inf(M); rho = N - 1 - 2 * K
     R = S0 - rho * np.eye(N, dtype=np.int64); c0 = R.sum(1); assert np.all(c0 % 2 == 0)
     rhs = c0 // 2
-    # line-sum coefficients: C[i, B, d, t] = sum_{u in fibre B, form d(u) = t} R[i, 49B+u]
+    # line-sum coefficients: C[i, B, d, t] = sum_{u in fiber B, form d(u) = t} R[i, 49B+u]
     C = np.zeros((N, 9, 8, 7), dtype=np.int64)
     for B in range(9):
         blk = R[:, 49 * B:49 * B + 49]
@@ -270,7 +270,7 @@ def solve(tg, K, restrict, autf, out, tlim=3600.0, workers=4, maxsol=100000, che
         return 1 - 2 * sw
 
     def assign_of(x):
-        """piece assignment (d, g) per fibre in canonical encoding, or None if x not in the model."""
+        """piece assignment (d, g) per fiber in canonical encoding, or None if x not in the model."""
         a = []
         for B in range(9):
             p = piece_of(x[49 * B:49 * B + 49])
@@ -327,9 +327,9 @@ def solve(tg, K, restrict, autf, out, tlim=3600.0, workers=4, maxsol=100000, che
 # ---------------------------------------------------------------- solvefull (NO piece restriction; sparse line-sum basis)
 def solvefull(tg, K, autf, inv, out, tlim=600.0, workers=4):
     """Unrestricted Sx = rho x with the equations rewritten as LINE-SUMMED rows: row (B,d,t) = sum of the rows of
-    (S - rho I) over the line {l_d = t} of fibre B.  By the sector lemma (structure) such a row is a function of l_d on
-    fibre B, of l' on the one coupled fibre B', and constant on every other fibre, so it is written with 14 line-sum
-    variables + 9 fibre totals.  inv = '-' or comma list of group-element indices whose invariance is imposed."""
+    (S - rho I) over the line {l_d = t} of fiber B.  By the sector lemma (structure) such a row is a function of l_d on
+    fiber B, of l' on the one coupled fiber B', and constant on every other fiber, so it is written with 14 line-sum
+    variables + 9 fiber totals.  inv = '-' or comma list of group-element indices whose invariance is imposed."""
     from ortools.sat.python import cp_model
     M = read_g6_file(tg)[0]; S0 = seidel_plus_inf(M); rho = N - 1 - 2 * K
     R = S0 - rho * np.eye(N, dtype=np.int64)
@@ -384,14 +384,14 @@ def solvefull(tg, K, autf, inv, out, tlim=600.0, workers=4):
 # ---------------------------------------------------------------- pairdfs (independent exact enumeration of the piece model)
 def pairdfs(tg, K, restrict, out):
     """Exact enumeration of the piece model WITHOUT a solver, via the sector lemma (checked numerically by `structure`
-    and re-checked here on every leaf by the full S x = rho x): S preserves the trivial sector (fibre-constant vectors
-    + oo) and couples every zero-mean line sector (B, l) to exactly one sector (B', l') of another fibre.  A piece fibre
-    along l has its zero-mean part in (B, l) alone, so non-constant fibres come in pairs {B, B'} along the coupled lines
-    (a matching of K_9); each pair must solve its own sector equation; constant fibres and oo satisfy the 10 x 10
+    and re-checked here on every leaf by the full S x = rho x): S preserves the trivial sector (fiber-constant vectors
+    + oo) and couples every zero-mean line sector (B, l) to exactly one sector (B', l') of another fiber.  A piece fiber
+    along l has its zero-mean part in (B, l) alone, so non-constant fibers come in pairs {B, B'} along the coupled lines
+    (a matching of K_9); each pair must solve its own sector equation; constant fibers and oo satisfy the 10 x 10
     trivial-sector equation.  Enumerates all matchings x valid pair-patterns x constants and keeps x_oo = +1."""
     M = read_g6_file(tg)[0]; S0 = seidel_plus_inf(M); rho = N - 1 - 2 * K
     R = S0 - rho * np.eye(N, dtype=np.int64)
-    # coupled line of fibre pair (B, B'): the direction d at B whose line-sum row hits fibre B' non-constantly
+    # coupled line of fiber pair (B, B'): the direction d at B whose line-sum row hits fiber B' non-constantly
     coup = {}
     for B in range(9):
         for d in range(8):
@@ -401,7 +401,7 @@ def pairdfs(tg, K, restrict, out):
     assert len(coup) == 72
     gs_all = [tuple((c >> t) & 1 for t in range(7)) for c in range(1, 127)]
     if restrict == 'h': gs_all = [g for g in gs_all if all(g[t] == g[(2 * t) % 7] for t in range(7))]
-    def zm(B, d, g):   # zero-mean part of x on fibre B for piece (d, g), times 7 (integer)
+    def zm(B, d, g):   # zero-mean part of x on fiber B for piece (d, g), times 7 (integer)
         x = np.array([1 - 2 * g[t] for t in LV[d]]); return 49 * x - x.sum()
     valid = {}
     for B in range(9):
@@ -416,7 +416,7 @@ def pairdfs(tg, K, restrict, out):
                 for g2 in negb.get((Rsub[:, :49] @ Z1[g]).tobytes(), []): lst.append((g, g2))
             valid[B, B2] = lst
     npairs = sum(len(v) for v in valid.values())
-    print(f"== pairdfs K={K} rho={rho} restrict={restrict}: valid pair patterns per fibre pair:",
+    print(f"== pairdfs K={K} rho={rho} restrict={restrict}: valid pair patterns per fiber pair:",
           sorted({len(v) for v in valid.values()}), 'total', npairs, flush=True)
     sols = []; leaves = 0
     def matchings(free):
@@ -426,7 +426,7 @@ def pairdfs(tg, K, restrict, out):
         for B2 in rest:
             if valid[B, B2]:
                 for m_ in matchings([b for b in rest if b != B2]): yield [(B, B2)] + m_
-    # trivial sector: x-bar = (s_B / 49 on fibre B, x_oo); (S - rho I) x-bar = 0  <=>  W (s_0..s_8, 49 x_oo) = 0
+    # trivial sector: x-bar = (s_B / 49 on fiber B, x_oo); (S - rho I) x-bar = 0  <=>  W (s_0..s_8, 49 x_oo) = 0
     W = np.zeros((10, 10), dtype=np.int64)
     for B in range(9):
         for B2 in range(9):
@@ -446,7 +446,7 @@ def pairdfs(tg, K, restrict, out):
         keys = [list(spairs[p].keys()) for p in mt]
         for skey in itertools.product(*keys, *[[(49,), (-49,)]] * len(un)):
             leaves += 1
-            s = np.zeros(10, dtype=np.int64); s[9] = 49            # x_oo = +1 (times 49 in the fibre rows)
+            s = np.zeros(10, dtype=np.int64); s[9] = 49            # x_oo = +1 (times 49 in the fiber rows)
             for (B, B2), (a, b) in zip(mt, skey[:len(mt)]): s[B], s[B2] = a, b
             for B, (c,) in zip(un, skey[len(mt):]): s[B] = c
             tri = W[:9] @ s; tri_oo = s[:9].sum() - rho
@@ -527,10 +527,10 @@ def descendant(SG, w):
 
 def classify(tg, solf, autf, knownf, outdir, tag):
     """Isomorphism classes of the solutions = Aut(M)-orbits (Aut(Omega) = Aut(M) fixes oo, so two members are
-    isomorphic iff their normalised switching vectors lie in one Aut(M)-orbit).  Every orbit representative is
+    isomorphic iff their normalized switching vectors lie in one Aut(M)-orbit).  Every orbit representative is
     checked exactly (regular + A^2 identity, float BLAS on 0/1 matrices, exact below 2^53).  Known members: the
-    switching vector is read off directly when the labelling agrees with M + oo; otherwise oo is located by the
-    4-clique count of the descendants, the descendant is mapped to M by pynauty canonical labelling (one call)."""
+    switching vector is read off directly when the labeling agrees with M + oo; otherwise oo is located by the
+    4-clique count of the descendants, the descendant is mapped to M by pynauty canonical labeling (one call)."""
     import pynauty
     M = read_g6_file(tg)[0]; S0 = seidel_plus_inf(M)
     group = [np.array(p) for p in json.load(open(autf))['group']]

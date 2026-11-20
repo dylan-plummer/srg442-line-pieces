@@ -1,12 +1,12 @@
 """Driver for f5.c: a nauty-free invariant of a regular two-graph on 442 points (first of the two two-graph invariants).
 
   1. F(x,y) = #K4 through y in the descendant D_x = #5-sets {x,y,a,b,c} with all 10 triples coherent (C program f5;
-     symmetric by definition -> checked).  F is an isomorphism invariant of the two-graph (edge-coloured K_442).
-  2. Colour refinement on (points, F): c_0(x) = sha(sorted row F(x,.)), c_{t+1}(x) = sha(c_t(x), sorted (F(x,y), c_t(y))).
-     Colours are labelling-independent strings, so they are comparable ACROSS two-graphs: an isomorphism Omega -> Omega'
+     symmetric by definition -> checked).  F is an isomorphism invariant of the two-graph (edge-colored K_442).
+  2. Color refinement on (points, F): c_0(x) = sha(sorted row F(x,.)), c_{t+1}(x) = sha(c_t(x), sorted (F(x,y), c_t(y))).
+     Colors are labeling-independent strings, so they are comparable ACROSS two-graphs: an isomorphism Omega -> Omega'
      mapping x to y forces c_t(x) = c'_t(y) for every t.  Since D_x determines (Omega, x), equal descendants => equal
-     colours; different colours at any fixed round => non-isomorphic descendants.
-  3. If the stable colouring is discrete, the order by colour is canonical; switching-normalise (row of the first
+     colors; different colors at any fixed round => non-isomorphic descendants.
+  3. If the stable coloring is discrete, the order by color is canonical; switching-normalize (row of the first
      point all +1) -> canonical Seidel matrix -> sha = COMPLETE two-graph invariant; Aut(two-graph) = 1 and the 442
      descendants are pairwise non-isomorphic.
 Run from koval/ (f5.c compiled to bin/f5, e.g. gcc -O2 -o bin/f5 scripts/census/f5.c):
@@ -14,7 +14,7 @@ Run from koval/ (f5.c compiled to bin/f5, e.g. gcc -O2 -o bin/f5 scripts/census/
         NAME = ours | mathon | a template-data json (data/template_data/...); writes data/f5/c2_TAG.json, F_TAG.npy
   python3 -I scripts/census/f5_invariant.py control NAME SEED TAG
         random re-root at a point + relabel + switching of NAME, then the same (positive control)
-Then scripts/census/f5_collect.py groups the results.  ('ours' is the Paley-fibre two-graph, 'mathon' is Mathon's.)
+Then scripts/census/f5_collect.py groups the results.  ('ours' is the Paley-fiber two-graph, 'mathon' is Mathon's.)
 """
 import sys, os, json, time, hashlib, subprocess
 sys.path.insert(0, 'scripts/census')

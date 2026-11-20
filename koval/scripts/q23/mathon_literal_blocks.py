@@ -77,10 +77,10 @@ def check(q):
     for u in range(n):
         x, y = pts[u]
         nbu = {((pts[v][0] - x) % q, (pts[v][1] - y) % q) for v in range(n) if Ad[u, v]}
-        assert nbu == nb0, 'fibre not Cayley'
+        assert nbu == nb0, 'fiber not Cayley'
     Lset = [j for j, L in enumerate(lines) if set(L) - {(0, 0)} <= nb0]
-    assert len(Lset) == (q + 1) // 2 and set().union(*[set(lines[j]) for j in Lset]) - {(0, 0)} == nb0, 'fibre lines'
-    # negative control: the fibre block is not a line incidence
+    assert len(Lset) == (q + 1) // 2 and set().union(*[set(lines[j]) for j in Lset]) - {(0, 0)} == nb0, 'fiber lines'
+    # negative control: the fiber block is not a line incidence
     assert incidence(Ad, q, pts, lines, fv) is None, 'negative control failed'
     tails, heads, out = [], [], []
     for k in range(1, 2 * t + 1):
@@ -100,7 +100,7 @@ def check(q):
         assert row == sorted(list(range(1, 2 * t + 1)) + [-k for k in range(1, 2 * t + 1)]), 'skew-Latin row %d' % i
         assert all(Ls[i, j] == -Ls[j, i] for j in range(p) if j != i)
     slopes = sorted(('inf' if j == q else j) for j in Lset)
-    print('q=%d: fibre = Cayley graph on %d lines (slopes %s); A_1..A_%d are line incidences with T an affine image of Q;'
+    print('q=%d: fiber = Cayley graph on %d lines (slopes %s); A_1..A_%d are line incidences with T an affine image of Q;'
           ' tails = the %d positive lines, heads = the %d negative lines, each once; skew-Latin rows OK' %
           (q, len(Lset), slopes, 2 * t, len(tails), len(heads)), flush=True)
     for (k, jt, jh, lam, T, af) in out:

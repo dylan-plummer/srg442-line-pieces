@@ -7,7 +7,7 @@
  * vertex hash  h(u)  = H(sorted list of code(u,v), v != u)
  * descendant hash I(D_x) = H(sorted list of h(u), u in D_x)
  * Output: one line per point x: "x I(D_x) Wmin Wmax".
- * I(D_x) depends only on the isomorphism class of D_x (all steps are labelling-free), so an isomorphism of two-graphs
+ * I(D_x) depends only on the isomorphism class of D_x (all steps are labeling-free), so an isomorphism of two-graphs
  * Omega -> Omega' mapping x to y forces I(D_x) = I'(D_y).  Hash collisions can only make different descendants look
  * equal, never make isomorphic descendants look different; so "different multisets of I" is a proof of
  * non-isomorphism, while equality proves nothing.

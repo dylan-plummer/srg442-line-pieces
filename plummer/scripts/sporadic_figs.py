@@ -4,8 +4,8 @@ python3 -I sporadic_figs.py S7.npy        -> ../figures/sporadic_gaps.pdf, ../fi
 
 S7.npy: Seidel matrix of Mathon's two-graph for q = 7 (int8, 442 x 442, oo last, vertex 49 i + 7 a + b), as built by
 paut_runs/m23/code/build.py; it is checked here against srg442's Construction (S^2 = 441 I and the member A_1).
-Every number drawn is recomputed here: the gaps of the centred line pieces for q = 7, 23, 47, 79, 167, 359, 727, the
-partner pair (fibre 1, slope 1) <-> (fibre 7, slope 6) of A_1 and its line sums, and the conference matrix sigma.
+Every number drawn is recomputed here: the gaps of the centered line pieces for q = 7, 23, 47, 79, 167, 359, 727, the
+partner pair (fiber 1, slope 1) <-> (fiber 7, slope 6) of A_1 and its line sums, and the conference matrix sigma.
 The search counts in panel (b) of the reduction figure are copied from paut_runs/m23/SUMMARY.txt (runs of glob.py)."""
 import os, sys, math
 import numpy as np
@@ -45,7 +45,7 @@ def kappa_values(q, T):
 
 
 def centred_gaps(q):
-    """gaps of the two-valued centred line pieces T (unions of {0}, Q, N, not empty, not all), for chi' and chi'(-.)"""
+    """gaps of the two-valued centered line pieces T (unions of {0}, Q, N, not empty, not all), for chi' and chi'(-.)"""
     _, Q = chi_table(q); N = set(range(1, q)) - Q
     gaps = set()
     for e0 in (0, 1):
@@ -108,7 +108,7 @@ def member_A1(q=7):
 
 
 def line_sums(xf, m, q=7):
-    """(L(0), L(1), L(3)): sums of the fibre function over the lines of slope m with intercept 0, 1 (in Q), 3 (in N)"""
+    """(L(0), L(1), L(3)): sums of the fiber function over the lines of slope m with intercept 0, 1 (in Q), 3 (in N)"""
     lab = np.array([(a if m == "inf" else (b - m * a)) % q for a in range(q) for b in range(q)])
     return tuple(int(xf[lab == c].sum()) for c in (0, 1, 3))
 
@@ -178,7 +178,7 @@ def fig_reduction(S):
     dvec = {m: ((0, 1) if m == "inf" else (1, m)) for m in slopes}
     sig = np.array([[0 if m == mm else chi[ell(m, dvec[mm])] for mm in slopes] for m in slopes])
     assert np.array_equal(sig @ sig.T, q * np.eye(q + 1, dtype=int))
-    # the pair (fibre 1, slope 1) <-> (fibre 7, slope 6), its multipliers and line sums
+    # the pair (fiber 1, slope 1) <-> (fiber 7, slope 6), its multipliers and line sums
     j, mm = partner(S.astype(float), 1, 1)
     assert (j, mm) == (7, 6)
     b = q * q; xf1, xf7 = x[b:2 * b], x[7 * b:8 * b]
@@ -198,9 +198,9 @@ def fig_reduction(S):
     fig = plt.figure(figsize=(6.5, 2.55))
     axa = fig.add_axes([0.0, 0.0, 0.45, 1.0]); axa.set_xlim(0, 10); axa.set_ylim(0, 5.6); axa.axis("off")
     axa.set_aspect("equal")
-    draw_wheel(axa, 2.2, 3.0, 1.35, e1, sg1, net, "fibre $1$: $\\ell_1^{-1}(Q)$",
+    draw_wheel(axa, 2.2, 3.0, 1.35, e1, sg1, net, "fiber $1$: $\\ell_1^{-1}(Q)$",
                f"$(\\Lambda(0),\\Lambda(Q),\\Lambda(N))=({L1[0]},{L1[1]},{L1[2]})$\n$v_1={v1},\\ w_1={w1}$")
-    draw_wheel(axa, 7.6, 3.0, 1.35, e7, sg7, net, "fibre $7$: $\\ell_6^{-1}(\\{0\\})$",
+    draw_wheel(axa, 7.6, 3.0, 1.35, e7, sg7, net, "fiber $7$: $\\ell_6^{-1}(\\{0\\})$",
                f"$(\\Lambda(0),\\Lambda(Q),\\Lambda(N))=({L7[0]},{L7[1]},{L7[2]})$\n$u_7={u7},\\ w_7={w7}$")
     axa.add_patch(FancyArrowPatch((3.95, 3.0), (5.85, 3.0), arrowstyle="<|-|>", mutation_scale=7, color=MUTED, lw=0.7))
     axa.text(4.9, 3.25, "partners", ha="center", va="bottom", fontsize=7, color=MUTED)

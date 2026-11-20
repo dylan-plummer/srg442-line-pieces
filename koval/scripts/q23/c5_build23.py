@@ -1,7 +1,7 @@
 """q = 23: build the regular two-graph on p q^2 + 1 = 13226 points (q = 23, p = 25) in two ways and verify exactly.
   mathon : literal Mathon Theorem 4.1 (base Paley(25) on GF(25) = GF(5)[w], w^2 = 2, index 5x+y; circulant
            skew-Latin square (4.1)),
-  template: our d = 1 Paley-fibre template (Pal(529) fibres, same base, circulant tournament on the indices).
+  template: our d = 1 Paley-fiber template (Pal(529) fibers, same base, circulant tournament on the indices).
 Checks per build: symmetric 0/1, zero diagonal; S^2 = 13225 I on ALL 13226^2 entries (float32 BLAS, exact);
 srg(13225, 6612, 3305, 3306) of the descendant at infinity via float32 A^2 (exact); writes the 13225-vertex
 descendant as graph6 with SHA-256.

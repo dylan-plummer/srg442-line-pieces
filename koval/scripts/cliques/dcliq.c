@@ -1,7 +1,7 @@
 /* count cliques of size W (Delsarte bound) in SRGs given as graph6, one per line.
    Usage: dcliq W E [maxclique_seconds] < file.g6
-   W = clique size to count, E = number of neighbours every outside vertex has in a W-clique
-   (Delsarte clique property, used as an exact shortcut: once |S| > E, every common neighbour
+   W = clique size to count, E = number of neighbors every outside vertex has in a W-clique
+   (Delsarte clique property, used as an exact shortcut: once |S| > E, every common neighbor
    of S must lie in the clique). E < 0 disables the shortcut (plain enumeration, for cross-checks).
    Output per graph: "G idx n count nodes ms [maxclique]" and "C idx v1 v2 ..." per clique.     */
 #include <stdio.h>
@@ -30,7 +30,7 @@ static int isclique(const bs *Q){int v[MAXN],m=0;for(int i=0;i<n;i++)if(has(Q,i)
   for(int i=0;i<m;i++)for(int j=i+1;j<m;j++)if(!has(&adj[v[i]],v[j]))return 0;return 1;}
 static void emit(const bs *Q){ fprintf(out,"C %d",gidx); for(int i=0;i<dS;i++)fprintf(out," %d",S[i]);
   if(Q)for(int i=0;i<n;i++)if(has(Q,i))fprintf(out," %d",i); fprintf(out,"\n"); }
-/* greedy colouring of P: order[] and col[] (col nondecreasing) */
+/* greedy coloring of P: order[] and col[] (col nondecreasing) */
 static int colour(const bs *P,int *order,int *col){
   bs U=*P; int m=0,c=0;
   while(!empty(&U)){

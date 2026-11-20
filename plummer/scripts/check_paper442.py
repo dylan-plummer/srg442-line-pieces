@@ -1,7 +1,7 @@
 """D.P.'s checks of statements in the joint 442 paper (main.tex), 14 Nov 2026.
 
   A  Table tab:orders  (n = p q^2 + 1, p = q + 2 a square, member parameters)
-  B  Omega_K data (base, tournament, fibres, forms, T) as printed in the paper; template conditions; srg; S^2 = p q^2 I
+  B  Omega_K data (base, tournament, fibers, forms, T) as printed in the paper; template conditions; srg; S^2 = p q^2 I
   C  operator facts used in the proof of Lemma decouple, block by block, on Omega_K, Omega_M and random template data:
        C1  S_ii (g o h) = -q (g o h) if ker h in L_i, +q otherwise   (g mean zero);   S_ii 1 = 0
        C2  S_ab 1 = eps_ab q 1;  S_{inf,i} = 1
@@ -67,8 +67,8 @@ print('B  Omega_K data')
 OKc = K2.ours_choice(); OMc = K2.mathon_choice()
 Lk = OKc['L'][0]
 print('   L_i (line indices; c = span(1,c), 7 = span(0,1)):', sorted(Lk))
-ok(sorted(Lk) == [0, 3, 4, 7] and all(l == Lk for l in OKc['L']), 'B: Omega_K fibres = lines of slopes 0, 3, 4, inf')
-ok(all(sorted(l) == [0, 1, 2, 4] for l in OMc['L']), 'B: Omega_M fibres = slopes {0} u Q')
+ok(sorted(Lk) == [0, 3, 4, 7] and all(l == Lk for l in OKc['L']), 'B: Omega_K fibers = lines of slopes 0, 3, 4, inf')
+ok(all(sorted(l) == [0, 1, 2, 4] for l in OMc['L']), 'B: Omega_M fibers = slopes {0} u Q')
 for (a, b, fa, fb, T) in OKc['arcs']:
     d = (b - a) % 9; want = {1: ((1, 1), (1, 0)), 2: ((1, 3), (0, 1)), 3: ((1, 4), (1, 2)), 4: ((1, 6), (1, 5))}[d]
     ok((fa, fb) == want and sorted(T) == ([1, 2, 4] if K2.PALEY9[a, b] else [0, 3, 5, 6]), 'B: Omega_K arc %d->%d as printed' % (a, b))
@@ -84,7 +84,7 @@ for ch in (OKc, OMc):
     A = K2.build(ch); ok(K2.verify(A)[0], 'B: srg441 %s' % ch['name'])
     S = K2.seidel_plus_inf(A)
     ok((S @ S == 9 * 49 * np.eye(442, dtype=np.int64)).all(), 'B: S^2 %s' % ch['name'])
-print('   Omega_K = Omega_M fibres?', sorted(OKc['L'][0]) == sorted(OMc['L'][0]))
+print('   Omega_K = Omega_M fibers?', sorted(OKc['L'][0]) == sorted(OMc['L'][0]))
 
 # ---------------- C ----------------
 print('C  operator facts')
@@ -112,7 +112,7 @@ def check_ops(ch, rng, tag):
         for k in range(8):
             g = rand_mean0(rng); v = fn(g, forms_by_line[k])
             sig = -1 if k in ch['L'][i] else 1
-            ok((blk(i, i) @ v == sig * q * v).all(), 'C1 %s fibre %d line %d' % (tag, i, k))
+            ok((blk(i, i) @ v == sig * q * v).all(), 'C1 %s fiber %d line %d' % (tag, i, k))
     for (a, b) in eps:
         if a != b: ok((blk(a, b) @ one == eps[(a, b)] * q * one).all(), 'C2 %s %d,%d' % (tag, a, b))
     for (a, b, fa, fb, T) in ch['arcs']:
@@ -135,7 +135,7 @@ def check_ops(ch, rng, tag):
             else: ok((img == 0).all(), 'C4 zero %s arc %d->%d line %d' % (tag, a, b, k))
         w = cmath.exp(2j * math.pi / P)
         ok(min(abs(sum(w ** (c * t) for t in T)) ** 2 for c in range(1, P)) > 0.5, 'C5 %s' % tag)
-    # cross blocks between fibres not joined by an arc do not exist (complete base)
+    # cross blocks between fibers not joined by an arc do not exist (complete base)
     ok(len(ch['arcs']) == 36, 'C %s 36 arcs' % tag)
 
 

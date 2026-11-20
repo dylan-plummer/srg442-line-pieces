@@ -6,8 +6,8 @@ Paper, data and verification programs for
 > 19 November 2026.
 
 We give a complete census of the line-piece regular members of two conference two-graphs on 442 points, Mathon's Ω_M
-and the Paley(49)-fibre two-graph Ω_P: 2356 pairwise non-isomorphic strongly regular graphs with parameters
-(442,231,120,121) or (442,210,99,100), organised into 15 frames per two-graph and degree. We also show that line pieces
+and the Paley(49)-fiber two-graph Ω_P: 2356 pairwise non-isomorphic strongly regular graphs with parameters
+(442,231,120,121) or (442,210,99,100), organized into 15 frames per two-graph and degree. We also show that line pieces
 are sporadic in Mathon's family q = s² − 2, and prove non-existence statements at q = 23 (13226 points).
 
 ## Contents

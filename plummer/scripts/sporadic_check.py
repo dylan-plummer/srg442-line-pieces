@@ -2,14 +2,14 @@
 """Checks for the sporadicity section, on the Seidel matrices of Mathon's two-graphs (oo last, vertex q^2 i + q a + b).
 python3 -I sporadic_check.py S7.npy [S23.npy]
 
-1. Lemma (slope decomposition), for every fibre i and slope m, on random mean-zero g:
+1. Lemma (slope decomposition), for every fiber i and slope m, on random mean-zero g:
    S_ii (g o l_m) = -q g o l_m for m in {0} u Q, +q for m in N u {oo};
    for exactly one j != i, S_ji (g o l_m) != 0, and then S_ji (g o l_m) = q Sigma_ji (kappa * g) o l_{m*} with m* = -m
    (0* = oo), kappa = chi'(-.) if m* in N u {oo}, chi' if m* in {0} u Q; Sigma_ji = -(row sum of S_ji)/q = +-1.
 2. Proposition (pair equations), on the 14 members of srg442's Table (rho = -21 for A, +21 for B), every partner pair:
    u_{j,m*} = Sigma_ij (eps s + 1) w_{i,m} / 2  and  v_{i,m} = -Sigma_ij (eps s - 1) w_{j,m*} / 2,
    (i, m) the slot with m in {0} u Q, (j, m*) its partner, rho = eps q s; u, v, w from the line sums L(0), L(Q), L(N).
-   Also the closed forms of the line sums of an h-invariant fibre function (sigma = bordered Jacobsthal matrix)."""
+   Also the closed forms of the line sums of an h-invariant fiber function (sigma = bordered Jacobsthal matrix)."""
 import sys, numpy as np
 
 def setup(q):
@@ -55,7 +55,7 @@ def check_lemma(S, q, rng):
             assert np.allclose(r, q * sig * conv(kap, g, q)[lab[ms]]), (q, i, m, j)
     return True
 
-TABLE = {   # srg442 Table 2: columns 00 01 02 10 11 12 20 21 22 (fibre i = 3 B1 + B2)
+TABLE = {   # srg442 Table 2: columns 00 01 02 10 11 12 20 21 22 (fiber i = 3 B1 + B2)
  "A1": "6:0 1:Q all 1:Q all 6:0 all 6:0 1:Q", "A2": "1:Q 6:0 all all 1:Q 6:0 6:0 all 1:Q",
  "A3": "0:0N - all 5:* 2:0N inf:0 3:0 all 4:Q", "A4": "4:0N all - 5:0 2:Q all 3:* 3:0 4:0N",
  "A5": "3:0 all 4:Q 5:* 2:0N 5:0 2:0N - all",

@@ -53,7 +53,7 @@ for r in PR:
         types[(B,ms)]=('u',cq[4]//cq[1]*(-1)*-1, C,ms2)   # u_B = ratio * w_C with ratio = -(c/k)*(-1)...
     elif cn[1]==0 and cn[3]==0 and cn[0]==-cn[2] and cn[4]==-cn[5]:
         types[(B,ms)]=('v',None,C,ms2)
-    else: raise SystemExit(f"unrecognised pattern {cq} {cn}")
+    else: raise SystemExit(f"unrecognized pattern {cq} {cn}")
 # exact ratios: Q-eq: -k S0 + k SQ + c SQ_C - c SN_C = 0 -> k(SQ - S0) = -c w_C -> u_B = (c/k) w_C
 U={};V={}
 for r in PR:

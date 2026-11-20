@@ -32,13 +32,18 @@
 \newcommand{\one}{\mathbf 1}
 \newcommand{\code}[1]{\texttt{#1}}
 \newcommand{\OM}{\Omega_{\mathrm M}}   % Mathon's two-graph
-\newcommand{\OP}{\Omega_{\mathrm P}}   % the variant with Paley(49) fibers (A.K.'s proposal, 16 Nov 2026)
-\newcommand{\todo}[1]{{\color{red}[TODO: #1]}}
+\newcommand{\OP}{\Omega_{\mathrm P}}   % the variant with Paley(49) fibers
 
 \title[Strongly regular graphs on 442 points]{Strongly regular graphs on $442$ points from line pieces
 in two conference two-graphs}
 \author{Dylan Plummer}
+\address{Postdoctoral Fellow, Case Western Reserve University School of Medicine, Cleveland, Ohio, USA}
+\email{dylan.plummer@case.edu}
+\urladdr{https://orcid.org/0000-0002-8901-5369}
 \author{Anton Kova\v{l}}
+\address{AI Lead, V\'UB banka, Bratislava, Slovakia}
+\email{akoval@pobox.sk}
+\urladdr{https://orcid.org/0009-0009-3182-6626}
 \date{19 November 2026}
 
 
@@ -412,8 +417,9 @@ with the same line-piece program ($14$ centered, $1$ rigid). So $29$ of the $235
 
 No census graph has a $22$-clique: the clique number is $13$ for $2192$ graphs and $14$ for $164$, all of the latter
 members of $\OM$ of degree $231$ (Table~\ref{tab:programs}). Since $22=1+231/11$ is the Delsarte bound, no census graph
-is geometric; in particular none is the block graph of a Steiner system $S(2,11,221)$, whose existence remains open. Nor is any of them the halved graph of a distance-regular graph on $884$
-vertices with Delsarte cliques of size $22$~\cite{BCN}.
+is geometric; in particular none is the block graph of a Steiner system $S(2,11,221)$, whose existence remains open. Nor is any of them a halved graph of a bipartite distance-regular graph on $884$
+vertices with intersection array $\{22,21,20,11;1,2,11,22\}$~\cite{BCN}: the $22$ neighbors of a vertex in the other
+half would form a $22$-clique.
 
 % ---------------------------------------------------------------------------------------------------------------
 \input{sections/sporadic.tex}
@@ -527,7 +533,7 @@ Soc.\ \textbf{18} (1986), 97--122, doi:10.1112/blms/18.2.97.
 \bibitem{CPSAT} L.~Perron and F.~Didier, \emph{CP-SAT}, OR-Tools v9.15, Google,
 \url{https://developers.google.com/optimization/cp/cp_solver/}.
 \bibitem{igraph} G.~Cs\'ardi and T.~Nepusz, \emph{The igraph software package for complex network research}, InterJournal
-Complex Systems \textbf{1695} (2006).
+Complex Systems \textbf{1695} (2006), \url{https://igraph.org}.
 \bibitem{GodsilRoyle} C.~Godsil and G.~Royle, \emph{Algebraic Graph Theory}, Grad.\ Texts in Math.\ \textbf{207}, Springer,
 2001, doi:10.1007/978-1-4613-0163-9.
 \bibitem{GoethalsSeidel1967} J.~M.~Goethals and J.~J.~Seidel, \emph{Orthogonal matrices with zero diagonal}, Canad.\ J.\
@@ -536,7 +542,7 @@ Math.\ \textbf{19} (1967), 1001--1010, doi:10.4153/CJM-1967-091-8.
 graphs}, Proc.\ ALENEX 2007, SIAM, 2007, 135--149, doi:10.1137/1.9781611972870.13.
 \bibitem{K833} A.~Kova\v{l}, \emph{A strongly regular graph with parameters $(833,416,207,208)$}, preprint, version~1.2,
 Zenodo, 2026, doi:10.5281/zenodo.23811118.
-\bibitem{LidlNiederreiter} R.~Lidl and H.~Niederreiter, \emph{Finite Fields}, 2nd ed., Encyclopedia Math.\ Appl.\ \textbf{20}, Cambridge Univ.\ Press, 1997.
+\bibitem{LidlNiederreiter} R.~Lidl and H.~Niederreiter, \emph{Finite Fields}, 2nd ed., Encyclopedia Math.\ Appl.\ \textbf{20}, Cambridge Univ.\ Press, 1997, doi:10.1017/CBO9780511525926.
 \bibitem{Mathon1978} R.~Mathon, \emph{Symmetric conference matrices of order $pq^2+1$}, Canad.\ J.\ Math.\ \textbf{30}
 (1978), 321--331, doi:10.4153/CJM-1978-029-1.
 \bibitem{nauty} B.~D.~McKay and A.~Piperno, \emph{Practical graph isomorphism, II}, J.\ Symbolic Comput.\ \textbf{60}

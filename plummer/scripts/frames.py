@@ -1,4 +1,4 @@
-"""Frames of the line-piece members (Kovac's census expanded to labeled switching sets).
+"""Frames of the line-piece members (Kovaľ's census expanded to labeled switching sets).
 python -I frames.py CENSUSDIR OUT.tsv
 
 For each two-graph (mathon = Omega_M, ours = Omega_K) and degree, every census class is expanded under Aut(Omega) to its

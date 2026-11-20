@@ -6,7 +6,7 @@ non-isomorphism, the clique numbers, the comparison of the template two-graphs, 
 The first author's programs are in `../plummer/`.
 
 **Names.** Ω_M is Mathon's conference two-graph for q = 7. Ω_P is the variant whose nine fibers are copies of
-Paley(49) (Ω_P is called Ω_K in the draft of 14 Nov). In file names and program identifiers Ω_M is `mathon` and Ω_P is
+Paley(49). In file names and program identifiers Ω_M is `mathon` and Ω_P is
 `ours`. Some program comments still write `Omega_K` for Ω_P. "Base graph" means the descendant of a two-graph at its
 point ∞. It is an srg(441,220,109,110).
 
@@ -130,8 +130,10 @@ Expected output:
 - `distinct srg(442,231,120,121) classes ... : 2356`;
 - `positive controls ... ALL PASS`.
 
-The reference files of the 29 members known before the census are not in this folder. When they are absent,
-`members.py` skips them and says so.
+The reference graphs of the 29 members known before the census are in `../plummer/data/graphs/`: the 14 graphs of
+[Plummer442] (`srg442_231_120_121_all.g6`, complements in `srg442_210_99_100_all.g6`) and the 15 earlier members of
+Ω_P (`koval442_new15.g6`). `members.py` reads them from `data/P3/` under its own file names; when they are absent it
+skips them and says so. `../plummer/scripts/census_props.py` locates all 29 in the census.
 
 ### 4. Two template two-graphs are not isomorphic; at least 23 two-graphs on 442 points (Table 5)
 
@@ -228,7 +230,7 @@ first author's side.
 ## Not in this folder
 
 - The four `classify` outputs and the run logs. They are reproduced by section 2.
-- The reference graphs of the 29 members known before the census.
+- The reference graphs of the 29 members known before the census (they are in `../plummer/data/graphs/`).
 - The script that complemented the degree-210 members for the archive.
 - The tally script of the clique runs.
 - The descendant comparison that identified the SageMath graph as a third two-graph.

@@ -1,0 +1,52 @@
+q=7 K=210: pairs 72, non-exact fits 0
+(5, 'inf') -> (0, '0') 
+   E_Q-E_0: [ 14. -14.  -0.  -0. -28.  28.  -0.] 
+   E_N-E_0: [ 14.   0. -14.  14. -28.  14.  -0.]
+(6, '6') -> (0, '1') 
+   E_Q-E_0: [ 14. -14.  -0.  -0.  28. -28.  -0.] 
+   E_N-E_0: [ 14.   0. -14. -14.  28. -14.  -0.]
+(8, '5') -> (0, '2') 
+   E_Q-E_0: [ 14. -14.  -0.  -0. -28.  28.  -0.] 
+   E_N-E_0: [ 14.  -0. -14.  14. -28.  14.   0.]
+(2, '4') -> (0, '3') 
+   E_Q-E_0: [ 28. -28.  -0. -14. -14.  28.   0.] 
+   E_N-E_0: [ 28.   0. -28.  -0. -28.  28.  -0.]
+(7, '3') -> (0, '4') 
+   E_Q-E_0: [ 14. -14.  -0.   0. -28.  28.  -0.] 
+   E_N-E_0: [ 14.   0. -14.  14. -28.  14.  -0.]
+(1, '2') -> (0, '5') 
+   E_Q-E_0: [ 28. -28.   0. -14. -14.  28.   0.] 
+   E_N-E_0: [ 28.  -0. -28.  -0. -28.  28.  -0.]
+distinct coefficient patterns: 4
+   ((np.float64(14.0), np.float64(-14.0), np.float64(-0.0), np.float64(-0.0), np.float64(-28.0), np.float64(28.0), np.float64(-0.0)), (np.float64(14.0), np.float64(0.0), np.float64(-14.0), np.float64(14.0), np.float64(-28.0), np.float64(14.0), np.float64(-0.0)))
+   ((np.float64(14.0), np.float64(-14.0), np.float64(-0.0), np.float64(-0.0), np.float64(28.0), np.float64(-28.0), np.float64(-0.0)), (np.float64(14.0), np.float64(0.0), np.float64(-14.0), np.float64(-14.0), np.float64(28.0), np.float64(-14.0), np.float64(-0.0)))
+   ((np.float64(28.0), np.float64(-28.0), np.float64(-0.0), np.float64(-14.0), np.float64(-14.0), np.float64(28.0), np.float64(0.0)), (np.float64(28.0), np.float64(0.0), np.float64(-28.0), np.float64(-0.0), np.float64(-28.0), np.float64(28.0), np.float64(-0.0)))
+   ((np.float64(28.0), np.float64(-28.0), np.float64(0.0), np.float64(14.0), np.float64(14.0), np.float64(-28.0), np.float64(-0.0)), (np.float64(28.0), np.float64(-0.0), np.float64(-28.0), np.float64(-0.0), np.float64(28.0), np.float64(-28.0), np.float64(-0.0)))
+sigma: symmetric? False antisym? False  sigma sigma^T diag/offdiag: [np.int64(7)] [0]
+closed forms verified: S0 = e0 + (q-1) al_m, SQ = A - al_m + P_m, SN = A - al_m - P_m, P = sigma delta
+u/v slots per block: [(4, 4)] ; u ratios [np.float64(-2.0), np.float64(2.0)] v ratios [np.float64(-1.0), np.float64(1.0)]
+u-type slope sets identical across blocks? True ; u-type slopes: ['3', '5', '6', 'inf']
+q=7 slopes 8 u-mod 4 v-mod 2 bounds u 7 v 3
+halves built 0s
+ e0=1: residue matches 4096
+ e0=1: after |P| bounds 3128
+ e0=-1: residue matches 4096
+ e0=-1: after |P| bounds 3128
+total local patterns 6256 (0s)
+q=7 K=210 TGRP=0: 6256 local patterns, orbits 9, domains after unary [6256, 6256, 6256, 6256, 6256, 6256, 6256, 6256, 6256]
+SOLUTION 1 at 0s nodes 2770
+SOLUTION 2 at 1s nodes 23919
+SOLUTION 3 at 2s nodes 66626
+SOLUTION 4 at 5s nodes 82073
+SOLUTION 5 at 5s nodes 90532
+SOLUTION 6 at 5s nodes 96110
+SOLUTION 7 at 5s nodes 97980
+SOLUTION 8 at 6s nodes 123060
+SOLUTION 9 at 7s nodes 146222
+SOLUTION 10 at 12s nodes 195195
+SOLUTION 11 at 12s nodes 196181
+SOLUTION 12 at 20s nodes 352209
+SOLUTION 13 at 23s nodes 379268
+SOLUTION 14 at 25s nodes 404316
+SOLUTION 15 at 25s nodes 408644
+done: 15 solutions, 417337 nodes, 25s

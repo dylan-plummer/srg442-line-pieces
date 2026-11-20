@@ -2,7 +2,6 @@
 % \input this inside a figure; needs \usetikzlibrary{positioning,calc,arrows.meta,fit,backgrounds} and \F, \srg, \Aut.
 % Color code as in Figure 2: blue = line(s) in a net direction, orange = outside the net, gray = whole fiber.
 % The small drawings use the example member of Figure 2 (its pair 0 -> 3 and its frame).
-% NOTE: Kovaľ's email gives "2 x 7 solutions per pair"; within a fixed frame the census has exactly 7 per pair.
 \begin{tikzpicture}[x=1mm, y=1mm, font=\small,
   box/.style={draw=black!70, rounded corners=2pt},
   inbox/.style={box, fill=black!3},

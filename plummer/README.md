@@ -39,8 +39,8 @@ searches, and compares the outputs with the files in `data/`.
 
 `results/`: `glob7.txt` (q = 7: exactly the 15 + 15 centered members), `glob23*.txt` (q = 23: empty),
 `h_slices_6670/`, `h_slices_6555/` (the 20 slices of each complete q = 23 h-invariant search: 284,271,840 and
-276,655,619 nodes, 0 solutions), `twoval23.txt`, `twoval31.txt`, `red7.txt`, `red23.txt`, and `SUMMARY.txt` (the
-working log of 8 November 2026, kept as a record; superseded where it says "running").
+276,655,619 nodes, 0 solutions), `twoval23.txt`, `twoval31.txt`, `red7.txt`, `red23.txt`, and `glob7_231.log`, `glob7_210.log` (the full q = 7 runs
+of `reproduce.sh` step 6, with the node counts 418,869 and 417,337 of the search table).
 
 To redo a q = 23 search (about 47 CPU hours for K = 6670, 45 for K = 6555; 20 slices in parallel):
 ```

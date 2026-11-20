@@ -6,7 +6,8 @@ S7.npy: Seidel matrix of Mathon's two-graph for q = 7 (int8, 442 x 442, oo last,
 paut_runs/m23/code/build.py; it is checked here against srg442's Construction (S^2 = 441 I and the member A_1).
 Every number drawn is recomputed here: the gaps of the centered line pieces for q = 7, 23, 47, 79, 167, 359, 727, the
 partner pair (fiber 1, slope 1) <-> (fiber 7, slope 6) of A_1 and its line sums, and the conference matrix sigma.
-The search counts in panel (b) of the reduction figure are copied from paut_runs/m23/SUMMARY.txt (runs of glob.py)."""
+The search counts in panel (b) of the reduction figure are copied from the logs of glob.py: plummer/m23/results/glob7_231.log, glob7_210.log (q = 7) and
+h_slices_6670/, h_slices_6555/ (q = 23)."""
 import os, sys, math
 import numpy as np
 import matplotlib
@@ -207,7 +208,7 @@ def fig_reduction(S):
     axa.text(4.9, 2.75, "$u_7=w_1$\n$v_1=-2\\,w_7$", ha="center", va="top", fontsize=7, color=INK, linespacing=1.3)
     fig.text(0.0, 0.98, "(a)", fontsize=8.5, va="top")
 
-    # (b) the search, log10 counts (from SUMMARY.txt; both degrees together)
+    # (b) the search, log10 counts (from the glob.py logs; both degrees together)
     stages = ["$h$-invariant vectors", "after the local\nconditions", "nodes of the\nexact search", "regular members"]
     c7 = [153 * math.log10(2), math.log10(2 * 6256 ** 9), math.log10(418869 + 417337), math.log10(30)]
     c23 = [1225 * math.log10(2), math.log10(206632 ** 25 + 189142 ** 25), math.log10(284271840 + 276655619), None]

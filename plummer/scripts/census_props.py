@@ -1,4 +1,4 @@
-"""Properties of the 2356 line-piece members (Kovac's census files) and where our 29 graphs lie among them.
+"""Properties of the 2356 line-piece members (Kovaľ's census files) and where our 29 graphs lie among them.
 python -I census_props.py CENSUSDIR OUT.tsv OURS.g6 [OURS.g6 ...]
 Per graph: source file, line, exact srg check, |Aut| (bliss via igraph), automorphism orbit lengths, canonical hash
 (igraph canonical_permutation), and the first of our files that contains an isomorphic graph."""

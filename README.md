@@ -30,3 +30,14 @@ python3 -I koval/scripts/checks/check_numbers.py   # A.K.'s number checks (see k
 
 Requirements: TeX Live (amsmath, booktabs, tikz, hyperref, placeins); Python 3 with numpy, python-igraph, matplotlib and
 pynauty (OR-Tools for the CP-SAT programs); gcc for the C programs in `koval/scripts`.
+
+## License
+
+Paper and data (`paper/`, `plummer/data/`, `koval/data/` and the result files and logs) are released under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (`LICENSE-CC-BY-4.0.txt`); the programs (`.py`, `.c` and
+`.sh` files under `plummer/` and `koval/scripts/`) under the MIT License. See `LICENSE`.
+
+## Citation
+
+Dylan Plummer and Anton Kovaľ, *Strongly regular graphs on 442 points from line pieces in two conference two-graphs*.
+The Zenodo record of each release takes its metadata from `.zenodo.json`.
